@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -20,21 +22,23 @@ public class BrighterDemo_4Gnipta {
       Color newColor = initialColor.brighter();
       System.out.println("After Brightening:");
       System.out.println("Red: " + newColor.getRed() + "  Green: " + newColor.getGreen() + "  Blue: " + newColor.getBlue());
- 
-      RectangleComponent rectangleComponent = new RectangleComponent(initialColor, newColor);
-      frame.add(rectangleComponent);
       
       frame.setVisible(true);
+ 
+      RectangleComponent rectangleComponent = new RectangleComponent(initialColor, newColor, frame.getContentPane().getBounds());
+      frame.add(rectangleComponent);
    }
 }
 
 class RectangleComponent extends JComponent {
    Color initialColor;
    Color newColor;
+   Rectangle frameBounds;
 
-   public RectangleComponent(Color initialColor, Color newColor) {
+   public RectangleComponent(Color initialColor, Color newColor, Rectangle frameBounds) {
       this.initialColor = initialColor;
       this.newColor = newColor;
+      this.frameBounds = frameBounds;
    }
 
    public void paintComponent(Graphics g) {
@@ -47,5 +51,14 @@ class RectangleComponent extends JComponent {
       Rectangle newColorRect = new Rectangle(500, 0, 500, 1000);
       g2D.fill(newColorRect);
       
+      String text = "Original Color";
+      g2D.setColor(Color.BLACK);
+      Font font = new Font("Verdana", Font.BOLD, 32);
+      g2D.setFont(font);
+      g2D.drawString(text, 10, 38);
+      
+      FontMetrics metrics = g2D.getFontMetrics(font);
+      text = "New Color";
+      g2D.drawString(text, frameBounds.width - metrics.stringWidth(text) - 10, 38);
    }
 }
