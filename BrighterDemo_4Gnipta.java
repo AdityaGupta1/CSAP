@@ -11,10 +11,10 @@ import javax.swing.JFrame;
 // Aditya Gupta and Jack Gnibus
 public class BrighterDemo_4Gnipta {
    public static void main(String[] args) {
-      JFrame frame = new JFrame();
-      frame.setSize(1000, 1000);
-      frame.setTitle("Colors");     
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      JFrame window = new JFrame();
+      window.setSize(1000, 1000);
+      window.setTitle("Colors");     
+      window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
       Color initialColor = new Color(50, 100, 150);
       System.out.println("Original Color:");
@@ -23,22 +23,22 @@ public class BrighterDemo_4Gnipta {
       System.out.println("After Brightening:");
       System.out.println("Red: " + newColor.getRed() + "  Green: " + newColor.getGreen() + "  Blue: " + newColor.getBlue());
       
-      frame.setVisible(true);
+      window.setVisible(true);
  
-      RectangleComponent rectangleComponent = new RectangleComponent(initialColor, newColor, frame.getContentPane().getBounds());
-      frame.add(rectangleComponent);
+      RectangleComponent rectangleComponent = new RectangleComponent(initialColor, newColor, window.getContentPane().getBounds());
+      window.add(rectangleComponent);
    }
 }
 
 class RectangleComponent extends JComponent {
    Color initialColor;
    Color newColor;
-   Rectangle frameBounds;
+   Rectangle windowBounds;
 
-   public RectangleComponent(Color initialColor, Color newColor, Rectangle frameBounds) {
+   public RectangleComponent(Color initialColor, Color newColor, Rectangle windowBounds) {
       this.initialColor = initialColor;
       this.newColor = newColor;
-      this.frameBounds = frameBounds;
+      this.windowBounds = windowBounds;
    }
 
    public void paintComponent(Graphics g) {
@@ -59,6 +59,6 @@ class RectangleComponent extends JComponent {
       
       FontMetrics metrics = g2D.getFontMetrics(font);
       text = "New Color";
-      g2D.drawString(text, frameBounds.width - metrics.stringWidth(text) - 10, 38);
+      g2D.drawString(text, windowBounds.width - metrics.stringWidth(text) - 10, 38);
    }
 }
