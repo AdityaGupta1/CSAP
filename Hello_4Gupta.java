@@ -1,4 +1,4 @@
-public class Hello_4GuptaA {
+public class Hello_4Gupta {
    /**
    * Prints out a greeting
    */

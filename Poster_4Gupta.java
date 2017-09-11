@@ -8,7 +8,7 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-public class Poster_4GuptaA {
+public class Poster_4Gupta {
    public static void main(String[] args) {
       JFrame window = new JFrame();
       window.setSize(800, 1200);
