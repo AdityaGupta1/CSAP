@@ -55,7 +55,7 @@ public class GunTester_4GuptaKim {
       plasmaCannon.print();
       plasmaCannon.reload();
       plasmaCannon.print();
-      plasmaCannon.shoot(2);
+      plasmaCannon.shoot(5);
       plasmaCannon.print();
    }
 }
