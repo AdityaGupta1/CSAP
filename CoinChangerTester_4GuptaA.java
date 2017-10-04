@@ -10,11 +10,14 @@ public class CoinChangerTester_4GuptaA {
    
       CoinChanger bellMarketCoinChanger = new CoinChanger(172, 156, 134, 173);
       System.out.println(bellMarketCoinChanger);
-      bellMarketCoinChanger.purchase(7.65, 10);
+      System.out.println();
+      bellMarketCoinChanger.purchase(7.65, 10.00);
       System.out.println(bellMarketCoinChanger);
-      bellMarketCoinChanger.purchase(126.74, 130);
+      System.out.println();
+      bellMarketCoinChanger.purchase(126.74, 130.00);
       System.out.println(bellMarketCoinChanger);
-      bellMarketCoinChanger.purchase(24.31, 25);
+      System.out.println();
+      bellMarketCoinChanger.purchase(24.31, 25.00);
       System.out.println(bellMarketCoinChanger);
    }
    
@@ -56,6 +59,8 @@ class CoinChanger {
    }
    
    public void purchase(double totalSale, double amountGiven) {
+      System.out.println("Performing transaction - price: " + totalSale + ", amount given: " + amountGiven);
+   
       int remainingChange = (int) Math.round((amountGiven - totalSale) * 100);
       int quartersToGive = remainingChange / 25;
       remainingChange %= 25;
@@ -79,7 +84,7 @@ class CoinChanger {
    
    @Override
    public String toString() {
-      return "This coin changer has " + 
+      return "The coin changer has " + 
          quarters + " quarters, " + 
          dimes + " dimes, " + 
          nickels + " nickels, and " + 
