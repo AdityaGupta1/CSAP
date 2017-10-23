@@ -1,3 +1,6 @@
+// Loops-A1: Ch 6 Book
+// Aditya Gupta
+
 import java.util.Scanner;
 
 public class LoopsHomework {
