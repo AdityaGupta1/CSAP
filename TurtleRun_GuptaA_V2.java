@@ -14,11 +14,10 @@ import java.awt.Font;
   Winner is the first turtle whose head crosses the finish line
   Winner moves to the bottom and does a "victory dance"
 */
-public class TurtleRun_GuptaA extends GraphicsProgram {
+public class TurtleRun_GuptaA_V2 extends GraphicsProgram {
    GTurtle[] turtles = new GTurtle[]{new GTurtle(100, 150), new GTurtle(100, 350)};
    GRect finishLine = new GRect(975, 0, 25, 500);
    GLabel finishLineLabel = new GLabel("FINISH", 1010, 20);
-   GLabel winnerLabel = new GLabel("WINNER!", 0, 0);
    Font labelFont = new Font("Arial", Font.BOLD, 18);
    
    GTurtle winner;
@@ -33,7 +32,6 @@ public class TurtleRun_GuptaA extends GraphicsProgram {
       finishLine.setFilled(true);
       add(finishLine);
       finishLineLabel.setFont(labelFont);
-      winnerLabel.setFont(labelFont);
       add(finishLineLabel);
    
       for (GTurtle turtle : turtles) {
@@ -66,12 +64,10 @@ public class TurtleRun_GuptaA extends GraphicsProgram {
          winner.forward(20);
       }
       
-      // victory dance (with sketchy for loop because using a for loop is a requirement)
-      add(winnerLabel);
-      for (;true;) {
+      // victory dance
+      for (int i = 0; i < 100; i++) {
          winner.setDirection(Math.random() * 360);
-         winner.forward(Math.random() * 20);
-         winnerLabel.setLocation(winner.getX() + winner.getWidth(), winner.getY() + winner.getHeight());
+         winner.forward(Math.random() * 2 * i);
       }
    }
    
@@ -94,6 +90,6 @@ public class TurtleRun_GuptaA extends GraphicsProgram {
    }
 
    public static void main(String[] args) {
-      new TurtleRun_GuptaA().start(args);
+      new TurtleRun_GuptaA_V2().start(args);
    }
 }
