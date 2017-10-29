@@ -1,29 +1,50 @@
 import java.util.Scanner;
+import java.util.List;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class TestQuizzer_Gupta {
    public static void main(String[] args) {
-      Quiz quiz = new Quiz("test quiz",
-         new Question(QuestionType.MULTIPLE_CHOICE, "mc test?", "72", "0", "12", "72", "600"),
-         new Question(QuestionType.SHORT_ANSWER, "sa test?", "73"),
-         new Question(QuestionType.TRUE_FALSE, "true/false test?", "false"));
+      Quiz quiz = new Quiz("Chemistry quiz",
+         new Question(QuestionType.MULTIPLE_CHOICE, 
+            "How many carbon atoms are in a molecule of glucose?", "6", "12", "3", "4"),
+         new Question(QuestionType.SHORT_ANSWER, 
+            "How many neutrons does an atom of carbon-14 have?", "8"),
+         new Question(QuestionType.TRUE_FALSE, 
+            "Isotopes of an element differ in their number of protons", "false"),
+         new Question(QuestionType.TRUE_FALSE, 
+            "Electrons have a negative charge", "true"),
+         new Question(QuestionType.MULTIPLE_CHOICE, 
+            "Which of the following elements' isotopes are all radioactive?", "technetium", "hydrogen", "neon", "tungsten"),
+         new Question(QuestionType.MULTIPLE_CHOICE, 
+            "Which of the following elements is a noble gas?", "helium", "carbon", "oxygen", "nitrogen"),
+         new Question(QuestionType.SHORT_ANSWER, 
+            "Which element is present in all organic compunds?", "carbon"),
+         new Question(QuestionType.MULTIPLE_CHOICE, 
+            "Which of the following scientists does not have an element named after him/her?", "Isaac Newton", "Nicolaus Copernicus", "Albert Einstein", "Marie Curie"));
          
-      quiz.ask();
-      System.out.println("score: " + quiz.getScore());
+      quiz.askQuestions();
+      System.out.println("Final score: " + quiz.getScore() + "/" + quiz.getNumberOfQuestions());
    }
 }
 
 class Quiz {
    private String title;
-   private Question[] questions;
+   private List<Question> questions;
    private int score = 0;
    
    public Quiz(String title, Question... questions) {
       this.title = title;
-      this.questions = questions;
+      this.questions = Arrays.asList(questions);
+      Collections.shuffle(this.questions);
    }
    
-   public void ask() {
+   public void askQuestions() {
+      System.out.println("=================================");
+      System.out.println(title);
+      System.out.println("=================================");
+      System.out.println();
+   
       for (Question question : questions) {
          score += question.ask();
       }
@@ -32,22 +53,27 @@ class Quiz {
    public int getScore() {
       return score;
    }
+   
+   public int getNumberOfQuestions() {
+      return questions.size();
+   }
 }
 
 class Question {
    private QuestionType type;
    private String question;
-   private String[] answers;
+   private List<String> answers;
    private String correctAnswer;
    private Scanner scanner = new Scanner(System.in);
    
    String[] multipleChoiceLetters = {"a", "b", "c", "d"};
    
-   public Question(QuestionType type, String question, String correctAnswer, String... answers) {
+   public Question(QuestionType type, String question, String... answers) {
       this.type = type;
       this.question = question;
-      this.answers = answers;
-      this.correctAnswer = correctAnswer;
+      correctAnswer = answers[0].toLowerCase();
+      this.answers = Arrays.asList(answers);
+      Collections.shuffle(this.answers);
    }
    
    public int ask() {
@@ -56,9 +82,16 @@ class Question {
       switch(type) {
          case MULTIPLE_CHOICE:
             System.out.println(question);
+            
+            int correctAnswerIndex = 0;
             for (int i = 0; i < 4; i++) {
-               System.out.println(multipleChoiceLetters[i] + ") " + answers[i]);
+               System.out.println(multipleChoiceLetters[i] + ") " + answers.get(i));
+               if (answers.get(i).equals(correctAnswer)) {
+                  correctAnswerIndex = i;
+               }
             }
+            correctAnswer = multipleChoiceLetters[correctAnswerIndex];
+            
             answer = scanner.nextLine().toLowerCase();
             while (!Arrays.asList(multipleChoiceLetters).contains(answer)) {
                System.out.println("Answer with \"a\", \"b\", \"c\", or \"d\"!");
@@ -67,10 +100,11 @@ class Question {
             break;
          case SHORT_ANSWER:
             System.out.println(question);
-            answer = scanner.nextLine();
+            answer = scanner.nextLine().toLowerCase();
             break;
          case TRUE_FALSE:
             System.out.println("True or False: " + question);
+            
             answer = scanner.nextLine().toLowerCase();
             while (!(answer.equals("true") || answer.equals("false"))) {
                System.out.println("Answer with \"true\" or \"false\"!");
@@ -79,15 +113,15 @@ class Question {
             break;
       }
       
-      if (answer.equals(correctAnswer)) {
+      boolean correct = answer.equals(correctAnswer);
+      if (correct) {
          System.out.println("Correct!");
-         return 1;
       } else {
          System.out.println("Incorrect!");
-         return 0;
       }
-      
       System.out.println();
+      
+      return correct ? 1 : 0;
    }
 }
 
