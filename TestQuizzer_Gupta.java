@@ -1,3 +1,6 @@
+// LoopsA7: Quizzer
+// Aditya Gupta, period 4
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.Arrays;
@@ -9,7 +12,7 @@ public class TestQuizzer_Gupta {
          new Question(QuestionType.MULTIPLE_CHOICE, 
             "How many carbon atoms are in a molecule of glucose?", "6", "12", "3", "4"),
          new Question(QuestionType.SHORT_ANSWER, 
-            "How many neutrons does an atom of carbon-14 have?", "8"),
+            "How many neutrons does an atom of carbon-14 have?", "14"),
          new Question(QuestionType.TRUE_FALSE, 
             "Isotopes of an element differ in their number of protons", "false"),
          new Question(QuestionType.TRUE_FALSE, 
