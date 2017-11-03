@@ -21,10 +21,10 @@ public class TestQuizzer_Gupta {
             "Which of the following elements' isotopes are all radioactive?", "technetium", "hydrogen", "neon", "tungsten"),
          new Question(QuestionType.MULTIPLE_CHOICE, 
             "Which of the following elements is a noble gas?", "helium", "carbon", "oxygen", "nitrogen"),
-         new Question(QuestionType.SHORT_ANSWER, 
-            "Which element is present in all organic compunds?", "carbon"),
          new Question(QuestionType.MULTIPLE_CHOICE, 
-            "Which of the following scientists does not have an element named after him/her?", "Isaac Newton", "Nicolaus Copernicus", "Albert Einstein", "Marie Curie"));
+            "Which of the following scientists does not have an element named after him/her?", "Isaac Newton", "Nicolaus Copernicus", "Albert Einstein", "Marie Curie"),
+         new Question(QuestionType.SHORT_ANSWER, 
+            "Which element is present in all organic compunds?", "carbon"));
          
       quiz.askQuestions();
       System.out.println("Final score: " + quiz.getScore() + "/" + quiz.getNumberOfQuestions());
@@ -69,7 +69,7 @@ class Question {
    private String correctAnswer;
    private Scanner scanner = new Scanner(System.in);
    
-   String[] multipleChoiceLetters = {"a", "b", "c", "d"};
+   List<String> multipleChoiceLetters = Arrays.asList(new String[] {"a", "b", "c", "d"});
    
    public Question(QuestionType type, String question, String... answers) {
       this.type = type;
@@ -88,15 +88,15 @@ class Question {
             
             int correctAnswerIndex = 0;
             for (int i = 0; i < 4; i++) {
-               System.out.println(multipleChoiceLetters[i] + ") " + answers.get(i));
-               if (answers.get(i).equals(correctAnswer)) {
+               System.out.println(multipleChoiceLetters.get(i) + ") " + answers.get(i));
+               if (answers.get(i).toLowerCase().equals(correctAnswer)) {
                   correctAnswerIndex = i;
                }
             }
-            correctAnswer = multipleChoiceLetters[correctAnswerIndex];
+            correctAnswer = multipleChoiceLetters.get(correctAnswerIndex);
             
             answer = scanner.nextLine().toLowerCase();
-            while (!Arrays.asList(multipleChoiceLetters).contains(answer)) {
+            while (!multipleChoiceLetters.contains(answer)) {
                System.out.println("Answer with \"a\", \"b\", \"c\", or \"d\"!");
                answer = scanner.nextLine().toLowerCase();
             }
