@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+Creates a quiz about chemistry
+*/
 public class TestQuizzer_Gupta {
    public static void main(String[] args) {
       Quiz quiz = new Quiz("Chemistry quiz",
          new Question(QuestionType.MULTIPLE_CHOICE, 
             "How many carbon atoms are in a molecule of glucose?", "6", "12", "3", "4"),
          new Question(QuestionType.SHORT_ANSWER, 
-            "How many neutrons does an atom of carbon-14 have?", "14"),
+            "How many neutrons does an atom of carbon-14 have?", "8"),
          new Question(QuestionType.TRUE_FALSE, 
             "Isotopes of an element differ in their number of protons", "false"),
          new Question(QuestionType.TRUE_FALSE, 
@@ -27,10 +30,32 @@ public class TestQuizzer_Gupta {
             "Which element is present in all organic compunds?", "carbon"));
          
       quiz.askQuestions();
-      System.out.println("Final score: " + quiz.getScore() + "/" + quiz.getNumberOfQuestions());
+      int score = quiz.getScore();
+      System.out.println("Final score: " + score + "/" + quiz.getNumberOfQuestions());
+      
+      switch (score) {
+         case 5:
+            System.out.println("Could be better, but not too bad overall!");
+            break;
+         case 6:
+            System.out.println("Not bad, only 2 missed!");
+            break;
+         case 7:
+            System.out.println("Hey, that's pretty good!");
+            break;
+         case 8:
+            System.out.println("Wow! You're a chemistry master!");
+            break;
+         default:
+            System.out.println("Looks like someone needs to study more!");
+            break;
+      }
    }
 }
 
+/**
+Represents a quiz, with a title, questions, and a score
+*/
 class Quiz {
    private String title;
    private List<Question> questions;
@@ -62,6 +87,9 @@ class Quiz {
    }
 }
 
+/**
+Represents a question that can be either multiple choice, short answer, or true/false
+*/
 class Question {
    private QuestionType type;
    private String question;
@@ -128,6 +156,9 @@ class Question {
    }
 }
 
+/**
+The three possible question types
+*/
 enum QuestionType {
    MULTIPLE_CHOICE, SHORT_ANSWER, TRUE_FALSE
 }
