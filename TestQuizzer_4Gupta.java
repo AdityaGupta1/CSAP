@@ -9,7 +9,7 @@ import java.util.Collections;
 /**
 Creates a quiz about chemistry
 */
-public class TestQuizzer_Gupta {
+public class TestQuizzer_4Gupta {
    public static void main(String[] args) {
       Quiz quiz = new Quiz("Chemistry quiz",
          new Question(QuestionType.MULTIPLE_CHOICE, 
