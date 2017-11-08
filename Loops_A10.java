@@ -1,3 +1,6 @@
+// Loops-A10: Ch 6 Book
+// Aditya Gupta
+
 /*
 
 ---------- R6.1b ----------
@@ -93,8 +96,23 @@ divide count by number of scores (number of values minus 3)
 
 */
 
-public class Loops-A10 {
+import java.util.Scanner;
+import java.lang.StringBuilder;
+
+public class Loops_A10 {
    public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+      System.out.print("Input: ");
+      String input = scanner.nextLine();
+      System.out.println();
       
+      System.out.println("E6.9\n-----");
+      for (char c : input.toCharArray()) {
+         System.out.println(c);
+      }
+      System.out.println();
+      
+      System.out.println("E6.10\n-----");
+      System.out.println(new StringBuilder(input).reverse().toString());
    }
 }
