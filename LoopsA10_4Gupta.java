@@ -99,7 +99,7 @@ divide count by number of scores (number of values minus 3)
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
-public class Loops_A10 {
+public class LoopsA10_4Gupta {
    public static void main(String[] args) {
       Scanner scanner = new Scanner(System.in);
       System.out.print("Input: ");
