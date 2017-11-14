@@ -1,0 +1,29 @@
+R7.1a
+===========
+
+int[] ints = new int[10];
+
+R7.1c
+===========
+
+ints[9] = 29;
+
+R7.1e
+===========
+
+for (int i = 0; i < ints.length; i++) {
+    ints[i]++;     
+}
+
+R7.1f
+===========
+
+for (int i : ints) {
+    System.out.println(i);
+}
+
+R7.3
+==========
+
+int[] ints = {1, 2, 3, 4};
+System.out.println();
