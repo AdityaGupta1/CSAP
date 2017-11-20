@@ -26,4 +26,70 @@ R7.3
 ==========
 
 int[] ints = {1, 2, 3, 4};
-System.out.println();
+System.out.println(ints[7]);
+
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 7
+	at Main.main(Main.java:4)
+
+R7.4
+==========
+Scanner scanner = new Scanner(System.in);
+int[] ints = new int[10];
+for (int i = 0; i < 10; i++) {
+	ints[i] = scanner.nextInt();
+}
+
+for (int i = 9; i >= 0; i--) {
+	System.out.println(ints[i]);
+}
+
+R7.5b
+==========
+for (int i = 0; i <= 10; i ++) {
+	values[i] = i * 2;
+}
+
+R7.5c
+==========
+for (int i = 0; i <= 10; i ++) {
+	values[i] = i * i;
+}
+
+R7.5f
+==========
+for (int i = 0; i < 10; i ++) {
+	values[i] = i % 2;
+}
+
+R7.6b
+==========
+13
+
+R7.6e
+==========
+11
+
+R7.6g
+==========
+12
+
+R7.9
+==========
+void printMaxMin(int[] array) {
+  int max = array[0];
+  int min = array[0];
+  for (int i : array) {
+     max = Math.max(max, i);
+     min = Math.min(min, i);
+  }
+  System.out.println("Maximum: " + max + ", Minimum: " + min);
+}
+
+R7.10a
+==========
+the for loop should be: for(int i = 0; i < 10; i++)
+otherwise, the loop will fill from index 1 to 10, meaning the array's size would have to be 11
+
+R7.10b
+==========
+values hasn't been initialized, so calling anything on it will throw a NullPointerException
