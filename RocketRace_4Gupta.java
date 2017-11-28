@@ -110,6 +110,7 @@ public class RocketRace_4Gupta extends GraphicsProgram {
 
 /*
   A rocket that consists of GObjects
+  Can move and do a victory dance
 */
 class GRocket {
    private int x;
@@ -125,12 +126,17 @@ class GRocket {
       this.y = y;
       this.g = g;
       
+      // main body
       parts[0] = new GOval(x, y - 10, 50, 20);
       parts[0].setColor(Color.LIGHT_GRAY);
       
+      // triangle at the end
       parts[1] = new GPolygon(new GPoint[]{new GPoint(x + 40, y + 8), new GPoint(x + 52, y), new GPoint(x + 40, y - 8)});
+      // rectangle between fins
       parts[2] = new GRect(x, y - 5, 10, 10);
+      // bottom fin
       parts[3] = new GPolygon(new GPoint[]{new GPoint(x, y + 5), new GPoint(x, y + 12), new GPoint(x + 10, y + 5)});
+      // top fin
       parts[4] = new GPolygon(new GPoint[]{new GPoint(x, y - 5), new GPoint(x, y - 12), new GPoint(x + 10, y - 5)});
       
       for (int i = 1; i <= 4; i++) {
@@ -139,12 +145,14 @@ class GRocket {
          ((GFillable) parts[i]).setFilled(true);
       }
       
+      // flames
       parts[5] = new GPolygon(new GPoint[]{new GPoint(x, y + 12), new GPoint(x - 6, y + 8), new GPoint(x - 4, y + 6), 
          new GPoint(x - 10, y), new GPoint(x - 4, y - 6), new GPoint(x - 6, y - 8), new GPoint(x, y - 12)});
       parts[5].setColor(Color.ORANGE);
       ((GFillable) parts[5]).setFillColor(Color.ORANGE);
       ((GFillable) parts[5]).setFilled(true);
       
+      // window
       parts[6] = new GOval(x + 25, y - 5, 10, 10);
       Color windowColor = new Color(174, 223, 242);
       parts[6].setColor(windowColor);
