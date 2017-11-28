@@ -1,6 +1,7 @@
 // Arrays-A5: Flexi Turtle Race
 // Aditya Gupta, period 4
 
+import java.util.Random;
 import acm.program.GraphicsProgram;
 import acm.graphics.GRect;
 import acm.graphics.GLabel;
@@ -8,6 +9,7 @@ import acm.graphics.GOval;
 import acm.graphics.GPolygon;
 import acm.graphics.GPoint;
 import acm.graphics.GObject;
+import acm.graphics.GFillable;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Font;
@@ -25,8 +27,6 @@ public class RocketRace_4Gupta extends GraphicsProgram {
    
    GRocket winner;
    boolean rocketWon = false;
-   
-   GPoint victoryPoint = new GPoint(500, 700);
    
    public void run() {
       String input;
@@ -54,10 +54,10 @@ public class RocketRace_4Gupta extends GraphicsProgram {
       rockets = new GRocket[numberOfRockets];
       
       for (int i = 0; i < rockets.length; i++) {
-         rockets[i] = new GRocket(100, 50 + (i * (400 / rockets.length)));
+         rockets[i] = new GRocket(100, 50 + (int) Math.round((i + 0.5) * (400 / rockets.length)), this);
       }
    
-      this.setSize(1200, 900 + 100);
+      this.setSize(1200, 600);
       
       finishLine.setColor(Color.BLACK);
       finishLine.setFilled(true);
@@ -82,10 +82,7 @@ public class RocketRace_4Gupta extends GraphicsProgram {
          pause(500);
       }
       
-      for (double i = 1; i < 2000; i *= -1.25) {
-         winner.move(i, 0);
-         pause(50);
-      }
+      winner.victoryDance();
    }
    
    private boolean isRocketFinished(GRocket rocket) {
@@ -105,72 +102,94 @@ public class RocketRace_4Gupta extends GraphicsProgram {
       
       return true;
    }
-   
-   
-   class GRocket {
-      private int x;
-      private int y;
-      
-      private GObject[] parts = new GObject[6];
-   
-      public GRocket(int x, int y) {
-         this.x = x;
-         this.y = y;
-         
-         parts[0] = new GOval(x, y - 10, 50, 20);
-         ((GOval) parts[0]).setFillColor(Color.LIGHT_GRAY);
-         ((GOval) parts[0]).setFilled(true);
-         
-         parts[1] = new GPolygon(new GPoint[]{new GPoint(x + 40, y + 8), new GPoint(x + 52, y), new GPoint(x + 40, y - 8)});
-         ((GPolygon) parts[1]).setFillColor(Color.LIGHT_GRAY);
-         ((GPolygon) parts[1]).setFilled(true);
-         
-         parts[2] = new GRect(x, y - 5, 10, 10);
-         ((GRect) parts[2]).setFillColor(Color.LIGHT_GRAY);
-         ((GRect) parts[2]).setFilled(true);
-         
-         parts[3] = new GPolygon(new GPoint[]{new GPoint(x, y + 5), new GPoint(x, y + 12), new GPoint(x + 10, y + 5)});
-         ((GPolygon) parts[3]).setFillColor(Color.LIGHT_GRAY);
-         ((GPolygon) parts[3]).setFilled(true);
-         
-         parts[4] = new GPolygon(new GPoint[]{new GPoint(x, y - 5), new GPoint(x, y - 12), new GPoint(x + 10, y - 5)});
-         ((GPolygon) parts[4]).setFillColor(Color.LIGHT_GRAY);
-         ((GPolygon) parts[4]).setFilled(true);
-         
-         for (int i = 0; i <= 4; i++) {
-            parts[i].setColor(Color.LIGHT_GRAY);
-         }
-         
-         parts[5] = new GOval(x + 30, y - 5, 10, 10);
-         Color windowColor = new Color(174, 223, 242);
-         ((GOval) parts[5]).setFillColor(windowColor);
-         ((GOval) parts[5]).setFilled(true);
-         parts[5].setColor(windowColor);
-         
-         for (GObject part : parts) {
-            add(part);
-         }
-      }
-      
-      public int getX() {
-         return x;
-      }
-      
-      public int getY() {
-         return y;
-      }
-      
-      public void move(double dx, double dy) {
-         for (GObject part : parts) {
-            part.move(dx, dy);
-         }
-         
-         x += dx;
-         y += dy;
-      }
-   }
 
    public static void main(String[] args) {
       new RocketRace_4Gupta().start(args);
+   }
+}
+
+/*
+  A rocket that consists of GObjects
+*/
+class GRocket {
+   private int x;
+   private int y;
+   private GraphicsProgram g;
+   
+   private GObject[] parts = new GObject[7];
+   
+   private static Random random = new Random();
+
+   public GRocket(int x, int y, GraphicsProgram g) {
+      this.x = x;
+      this.y = y;
+      this.g = g;
+      
+      parts[0] = new GOval(x, y - 10, 50, 20);
+      parts[0].setColor(Color.LIGHT_GRAY);
+      
+      parts[1] = new GPolygon(new GPoint[]{new GPoint(x + 40, y + 8), new GPoint(x + 52, y), new GPoint(x + 40, y - 8)});
+      parts[2] = new GRect(x, y - 5, 10, 10);
+      parts[3] = new GPolygon(new GPoint[]{new GPoint(x, y + 5), new GPoint(x, y + 12), new GPoint(x + 10, y + 5)});
+      parts[4] = new GPolygon(new GPoint[]{new GPoint(x, y - 5), new GPoint(x, y - 12), new GPoint(x + 10, y - 5)});
+      
+      for (int i = 1; i <= 4; i++) {
+         parts[i].setColor(Color.LIGHT_GRAY);
+         ((GFillable) parts[i]).setFillColor(Color.LIGHT_GRAY);
+         ((GFillable) parts[i]).setFilled(true);
+      }
+      
+      parts[5] = new GPolygon(new GPoint[]{new GPoint(x, y + 12), new GPoint(x - 6, y + 8), new GPoint(x - 4, y + 6), 
+         new GPoint(x - 10, y), new GPoint(x - 4, y - 6), new GPoint(x - 6, y - 8), new GPoint(x, y - 12)});
+      parts[5].setColor(Color.ORANGE);
+      ((GFillable) parts[5]).setFillColor(Color.ORANGE);
+      ((GFillable) parts[5]).setFilled(true);
+      
+      parts[6] = new GOval(x + 25, y - 5, 10, 10);
+      Color windowColor = new Color(174, 223, 242);
+      parts[6].setColor(windowColor);
+      ((GFillable) parts[6]).setFillColor(windowColor);
+      ((GFillable) parts[6]).setFilled(true);
+      
+      for (GObject part : parts) {
+         g.add(part);
+      }
+   }
+   
+   public int getX() {
+      return x;
+   }
+   
+   public int getY() {
+      return y;
+   }
+   
+   public void move(double dx, double dy) {
+      for (GObject part : parts) {
+         part.move(dx, dy);
+      }
+      
+      x += dx;
+      y += dy;
+   }
+   
+   private Color randomColor() {
+      return new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
+   }
+   
+   public void victoryDance() {
+      int move = 0;
+   
+      while (true) {
+         for (GObject part : parts) {
+            part.setColor(randomColor());
+            ((GFillable) part).setFillColor(randomColor());
+         }
+         
+         move(move, 0);
+         move = random.nextInt(50) - 25;
+         
+         g.pause(100);
+      }
    }
 }
