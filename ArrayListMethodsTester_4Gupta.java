@@ -47,6 +47,12 @@ public class ArrayListMethodsTester_4Gupta {
       System.out.println("arraylist 4 " + (methods4.containsDuplicate() ? "cotains" : "does not contain") + " two duplicate numbers");
    }
    
+   /**
+    * Converts an array of ints to an ArrayList<Integer> 
+    *
+    * @param  array the array to convert
+    * @return       the array's ArrayList equivalent
+    */
    static ArrayList<Integer> convertArrayToArrayList(int[] array) {
       ArrayList<Integer> ints = new ArrayList<Integer>();
       
