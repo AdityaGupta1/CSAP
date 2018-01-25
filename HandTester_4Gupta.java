@@ -24,11 +24,6 @@ class Card {
       }
    }
    
-   @Override
-   public String toString() {
-      return rank + " of " + suit + " (" + value + " points)";
-   }
-   
    public String getRank() {
       return rank;
    }
@@ -43,6 +38,11 @@ class Card {
    
    public void setValue(int value) {
       this.value = value;
+   }
+   
+   @Override
+   public String toString() {
+      return rank + " of " + suit + " (" + value + "p)";
    }
 }
 
@@ -87,7 +87,65 @@ class Deck {
    }
 }
 
-public class ShuffleTester_4Gupta {
+class Hand {
+   private ArrayList<Card> cards = new ArrayList<Card>();
+   private int value = 0;
+   
+   public Hand(Card... cards) {
+      for (Card card : cards) {
+         this.cards.add(card);
+      }
+      
+      updateValue();
+   }
+   
+   public void addCard(Card card) {
+      cards.add(card);
+      updateValue();
+   }
+   
+   private void updateValue() {
+      value = 0;
+      int aces = 0;
+      
+      for (Card card : cards) {
+         aces += card.getRank().equals("A") ? 1 : 0;
+         value += card.getValue();
+      }
+      
+      if (value <= 21 || aces == 0) {
+         return;
+      }
+      
+      for (Card card : cards) {
+         if (card.getValue() != 11) {
+            continue;
+         }
+         
+         card.setValue(1);
+         value -= 10;
+         
+         if (value < 21) {
+            break;
+         }
+      }
+   }
+   
+   public int getValue() {
+      return value;
+   }
+   
+   public boolean isBusted() {
+      return value > 21;
+   }
+   
+   @Override
+   public String toString() {
+      return "cards: " + cards + ", " + value + "p, " + (isBusted() ? "" : "not ") + "busted";
+   }
+}
+
+public class HandTester_4Gupta {
    static final String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
    static final String[] suits = {"clubs", "diamonds", "hearts", "spades"};
    
@@ -95,9 +153,14 @@ public class ShuffleTester_4Gupta {
    
    public static void main(String[] args) {
       Deck deck = new Deck(ranks, suits);
+      Hand hand1 = new Hand();
+      Hand hand2 = new Hand();
       
-      while (deck.getSize() > 0) {
-         System.out.println(deck.deal());
+      while (!(hand1.isBusted() && hand2.isBusted())) {
+         hand1.addCard(deck.deal());
+         System.out.println("hand 1 - " + hand1);
+         hand2.addCard(deck.deal());
+         System.out.println("hand 2 - " + hand2);
       }
    }
 }
