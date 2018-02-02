@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class DealerTester_4Gupta {
+public class BlackjackTester_4Gupta {
    static final String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
    static final String[] suits = {"clubs", "diamonds", "hearts", "spades"};
    
@@ -26,6 +26,9 @@ public class DealerTester_4Gupta {
          System.out.println();
       }
    }
+}
+
+class BlackjackGame {
 }
 
 class Dealer {
