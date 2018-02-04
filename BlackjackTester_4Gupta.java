@@ -3,32 +3,64 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class BlackjackTester_4Gupta {
-   static final String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-   static final String[] suits = {"clubs", "diamonds", "hearts", "spades"};
-   
    static ArrayList<Card> cards = new ArrayList<Card>();
    
    public static void main(String[] args) {
-      for (int i = 0; i < 3; i++) {
-         System.out.println("----------------------");
-         System.out.println("Round " + (i + 1));
-         System.out.println("----------------------");
-         
-         Dealer dealer = new Dealer(new Deck(ranks, suits), new Hand());
-      
-         while (dealer.shouldDraw()) {
-            dealer.draw();
-            dealer.display();
-            System.out.println();
-         }
-         
-         dealer.displayAll();
-         System.out.println();
-      }
+      BlackjackGame game = new BlackjackGame(3);
+      game.playGame();   
    }
 }
 
 class BlackjackGame {
+   private static final String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+   private static final String[] suits = {"clubs", "diamonds", "hearts", "spades"};
+
+   private Deck deck = new Deck(ranks, suits);
+   private int numberOfPlayers;
+   private ArrayList<Player> players = new ArrayList<>();
+   private Dealer dealer = new Dealer(deck, new Hand());   
+   
+   public BlackjackGame(int numberOfPlayers) {
+      this.numberOfPlayers = numberOfPlayers;
+      resetPlayers();
+   }
+   
+   public void resetPlayers() {
+      for (int i = 0; i < numberOfPlayers; i++) {
+         players.add(new Player("heblo", deck, new Hand()));
+      }
+   }
+   
+   public void resetDeck() {
+      deck = new Deck(ranks, suits);
+   }
+   
+   public void playGame() {
+      for (Player player : players) {
+         System.out.println("\n[It is " + player.getName() + "'s turn]");
+      
+         while (!player.isDone()) {
+            System.out.println();
+            player.displayHand();
+            System.out.println();
+            player.doRound();
+         }
+         
+         System.out.println("\n" + player.getName() + "'s final hand:");
+         player.displayHand();
+      }
+      
+      System.out.println("\n[It is the dealer's turn]\n");
+      
+      while (dealer.shouldDraw()) {
+         dealer.displayAll();
+         System.out.println();
+         dealer.draw();
+      }
+      
+      System.out.println("The dealer's final hand:");
+      dealer.displayAll();
+   }
 }
 
 class Dealer {
@@ -45,7 +77,7 @@ class Dealer {
    }
    
    public boolean shouldDraw() {
-      return hand.getValue() <= 16 || (hand.getValue() == 17 && hand.getAces() > 0);
+      return hand.getValue() < 17 || (hand.getValue() == 17 && hand.getAces() > 0);
    }
    
    public int getHandValue() {
@@ -64,14 +96,20 @@ class Dealer {
 }
 
 class Player {
+   private String name;
    private Deck deck;
    private Hand hand;
    
    private boolean done = false;
    
-   public Player(Deck deck, Hand hand) {
+   public Player(String name, Deck deck, Hand hand) {
+      this.name = name;
       this.deck = deck;
       this.hand = hand;
+      
+      for (int i = 0; i < 2; i++) {
+         draw();
+      }
    }
    
    public int getHandValue() {
@@ -92,23 +130,21 @@ class Player {
       return input.toLowerCase();
    }
    
-   public void doRound() {
-      if (done) {
-         return;
-      }
+   public void draw() {
+      hand.addCard(deck.deal());
+   }
    
+   public void doRound() {
       String choice = getUserChoice();
       
       if (choice.equals("hit")) {
-         hand.addCard(deck.deal());
-         System.out.println();
-         displayHand();
-         System.out.println();
+         draw();
       } else {
          done = true;
-         System.out.println();
-         displayHand();
-         System.out.println();
+      }
+      
+      if (hand.isBusted()) {
+         done = true;
       }
    }
    
@@ -118,6 +154,10 @@ class Player {
    
    public Hand getHand() {
       return hand;
+   }
+   
+   public String getName() {
+      return name;
    }
    
    public void displayHand() {
