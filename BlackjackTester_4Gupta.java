@@ -6,28 +6,31 @@ public class BlackjackTester_4Gupta {
    static ArrayList<Card> cards = new ArrayList<Card>();
    
    public static void main(String[] args) {
-      BlackjackGame game = new BlackjackGame(3);
-      game.playGame();   
+      BlackjackGame game = new BlackjackGame(new String[]{"Sam", "Todd", "James", "Bob"});
+      System.out.println("\nWinners: " + game.playGame());   
    }
 }
 
 class BlackjackGame {
    private static final String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
    private static final String[] suits = {"clubs", "diamonds", "hearts", "spades"};
+   
+   private String[] names;
+   private int numberOfPlayers;
 
    private Deck deck = new Deck(ranks, suits);
-   private int numberOfPlayers;
    private ArrayList<Player> players = new ArrayList<>();
    private Dealer dealer = new Dealer(deck, new Hand());   
    
-   public BlackjackGame(int numberOfPlayers) {
-      this.numberOfPlayers = numberOfPlayers;
+   public BlackjackGame(String... names) {
+      this.names = names;
+      numberOfPlayers = names.length;
       resetPlayers();
    }
    
    public void resetPlayers() {
       for (int i = 0; i < numberOfPlayers; i++) {
-         players.add(new Player("heblo", deck, new Hand()));
+         players.add(new Player(names[i], deck, new Hand()));
       }
    }
    
@@ -35,7 +38,19 @@ class BlackjackGame {
       deck = new Deck(ranks, suits);
    }
    
-   public void playGame() {
+   public void dealCards() {
+      for (int i = 0; i < 2; i++) {
+         for (Player player : players) {
+            player.draw();
+         }
+         
+         dealer.draw();
+      }
+   }
+   
+   public String playGame() {
+      dealCards();
+   
       for (Player player : players) {
          System.out.println("\n[It is " + player.getName() + "'s turn]");
       
@@ -60,6 +75,47 @@ class BlackjackGame {
       
       System.out.println("The dealer's final hand:");
       dealer.displayAll();
+      
+      ArrayList<Integer> scores = new ArrayList<>();
+      
+      for (Player player : players) {
+         scores.add(player.getHandValue());
+      }
+      scores.add(dealer.getHandValue());
+      
+      ArrayList<Integer> unsortedScores = new ArrayList<>(scores);
+      
+      Collections.sort(scores);
+      
+      int maxScore = 0;
+      ArrayList<String> winners = new ArrayList<>();
+      
+      loop:
+      for (int i = 0; i < scores.size(); i++) {
+         if (scores.get(i) > 21) {
+            continue loop;
+         }
+         
+         if (maxScore == 0) {
+            maxScore = scores.get(i);
+            System.out.println(maxScore);
+         }
+         
+         if (scores.get(i) == maxScore) {
+            if (i == unsortedScores.size() - 1) {
+               winners.add("dealer");
+            } else {
+               winners.add(players.get(i).getName());
+            }
+         }
+      }
+      
+      if (maxScore == 0) {
+         winners.add("nobody");
+      }
+      
+      String winnersString = winners.toString();
+      return winnersString.substring(1, winnersString.length() - 1);
    }
 }
 
@@ -106,10 +162,6 @@ class Player {
       this.name = name;
       this.deck = deck;
       this.hand = hand;
-      
-      for (int i = 0; i < 2; i++) {
-         draw();
-      }
    }
    
    public int getHandValue() {
