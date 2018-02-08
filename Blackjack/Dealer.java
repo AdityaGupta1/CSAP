@@ -1,6 +1,10 @@
+/**
+ * The dealer in the blackjack game
+ */
 public class Dealer implements Person {
    private Hand hand;
    private Deck deck;
+   private int wins = 0;
 
    public Dealer(Hand hand, Deck deck) {
       this.hand = hand;
@@ -26,17 +30,26 @@ public class Dealer implements Person {
       return getHandValue() > 21;
    }
    
+   @Override
+   public void win() {
+      wins++;
+   }
+   
+   @Override
+   public int getWins() {
+      return wins;
+   }
+   
+   @Override
+   public void reset() {
+      hand = new Hand();
+   }
+   
    public boolean shouldDraw() {
       return hand.getValue() < 17;
    }
    
    public void display() {
-      for (int i = 1; i < hand.getSize(); i++) {
-         System.out.println(hand.getCards().get(i) + ((i == hand.getSize() - 1) ? "" : ","));
-      }
-   }
-   
-   public void displayAll() {
       System.out.println(hand);
    }
    

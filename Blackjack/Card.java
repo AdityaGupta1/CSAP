@@ -1,8 +1,14 @@
+/**
+ * A playing card
+ */
 public class Card {
    private String rank;
    private String suit;
    private int value;
    
+   /**
+    * Constructor that sets instance variables and determines the card's default value
+    */
    public Card(String rank, String suit) {
       this.suit = suit;
       this.rank = rank;

@@ -1,8 +1,17 @@
 import java.util.ArrayList;
 
+/**
+ * A deck of cards
+ */
 public class Deck {
    private ArrayList<Card> cards = new ArrayList<Card>();
    
+   /**
+    * Updates the hand's value, taking aces into account
+    *
+    * @param  ranks  the possible card ranks
+    * @param  suits  the possible card suits
+    */
    public Deck(String[] ranks, String[] suits) {
       for (String rank : ranks) {
          for (String suit : suits) {
@@ -17,6 +26,9 @@ public class Deck {
       return cards.size();
    }
    
+   /**
+    * Shuffles the deck using the "efficient selection shuffle"
+    */
    public void shuffle() {
       for (int i = cards.size() - 1; i > 0; i--) {
          int j = (int) (Math.random() * (i));
@@ -28,6 +40,11 @@ public class Deck {
       return cards.size() == 0;
    }
    
+   /**
+    * Deals a card
+    *
+    * @return  the card dealt
+    */
    public Card deal() {
       if (isEmpty()) {
          return null;

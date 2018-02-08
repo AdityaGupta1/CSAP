@@ -1,9 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * A player in the blackjack game
+ */
 public class Player implements Person {
    private String name;
    private Hand hand;
    private Deck deck;
+   private int wins = 0;
    
    private boolean done = false;
    
@@ -32,6 +36,27 @@ public class Player implements Person {
       return getHandValue() > 21;
    }
    
+   @Override
+   public void win() {
+      wins++;
+   }
+   
+   @Override
+   public int getWins() {
+      return wins;
+   }
+   
+   @Override
+   public void reset() {
+      hand = new Hand();
+      done = false;
+   }
+   
+   /**
+    * Reads user choice (hit/stand) from console
+    *
+    * @return  the user's choice (hit/stand)
+    */
    public String getUserChoice() {
       Scanner reader = new Scanner(System.in);
       
@@ -46,6 +71,9 @@ public class Player implements Person {
       return input.toLowerCase();
    }
    
+   /**
+    * Runs a round (hits/stands depending on user choice and determines if player is done) 
+    */
    public void doRound() {
       String choice = getUserChoice();
       

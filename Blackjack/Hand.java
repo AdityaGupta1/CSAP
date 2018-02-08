@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * A hand of cards that has a point value
+ */
 public class Hand {
    private ArrayList<Card> cards = new ArrayList<Card>();
    private int value = 0;
@@ -18,6 +21,9 @@ public class Hand {
       updateValue();
    }
    
+   /**
+    * Updates the hand's value, taking aces into account
+    */
    private void updateValue() {
       value = 0;
       aces = 0;
@@ -65,6 +71,11 @@ public class Hand {
       return cards.size();
    }
    
+   /**
+    * Creates a string for displaying the hand
+    *
+    * @return  a multi-line string for displaying the hand
+    */
    @Override
    public String toString() {
       String handString = "";
@@ -73,7 +84,7 @@ public class Hand {
          handString += cards.get(i) + ",\n";
       }
       
-      handString += (value == 21 ? "blackjack" : (value + " points")) + (isBusted() ? ", busted" : "");
+      handString += ((value == 21 && cards.size() == 2) ? "blackjack" : (value + " points")) + (isBusted() ? ", busted" : "");
       
       return handString;
    }
