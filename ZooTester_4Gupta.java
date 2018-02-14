@@ -30,7 +30,7 @@ public class ZooTester_4Gupta {
       
       LeopardGecko leopardGecko = (LeopardGecko) animals.get(3);
       TokayGecko tokayGecko = (TokayGecko) animals.get(4);
-      System.out.println(leopardGecko + " and " + tokayGecko + " bred to create " + leopardGecko.breed(tokayGecko));
+      System.out.println(leopardGecko + " and " + tokayGecko + " bred to create:\n\t" + leopardGecko.breed(tokayGecko));
    }
 }
 
