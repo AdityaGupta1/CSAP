@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class HierarchyDemo_4MaGupta {
    public static void main(String[] args) {
@@ -11,9 +12,13 @@ public class HierarchyDemo_4MaGupta {
       
       player.kill(zombie);
       player.kill(pig);
+            
+      System.out.println("\n" + player.fullDescription());
       
-      System.out.println();
+      List<ItemStack> subtract = Arrays.asList(new ItemStack[]{new ItemStack(new Item("rotten flesh"), 1)});
+      player.getInventory().subtract(subtract, true);
       
+      System.out.println("\n" + subtract);
       System.out.println(player.fullDescription());
    }
 }
@@ -23,6 +28,15 @@ class Item {
    
    public Item(String name) {
       this.name = name;
+   }
+   
+   public String getName() {
+      return name;
+   }
+   
+   @Override
+   public boolean equals(Object other) {
+      return (other instanceof Item) && (((Item) other).name == this.name);
    }
    
    @Override
@@ -44,6 +58,53 @@ class ItemStack {
       this(new Item(name), amount);
    }
    
+   public Item getItem() {
+      return item;
+   }
+   
+   public int getAmount() {
+      return amount;
+   }
+   
+   @Override
+   public boolean equals(Object other) {
+      if (!(other instanceof ItemStack)) {
+         return false;
+      }
+      
+      ItemStack otherItemStack = (ItemStack) other;
+   
+      return (otherItemStack.item.equals(this.item)) && (otherItemStack.amount == this.amount);
+   }
+   
+   public boolean has(ItemStack other) {
+      if (!other.item.equals(this.item)) {
+         return false;
+      }
+      
+      return this.amount >= other.amount;
+   }
+   
+   public boolean subtract(ItemStack other, boolean check) {
+      if (check && !has(other)) {
+         return false;
+      }
+      
+      if (has(other)) {
+         this.amount -= other.amount;
+         other.amount = 0;
+      } else {
+         this.amount = 0;
+         other.amount -= this.amount;
+      }
+      
+      return true;
+   }
+   
+   public boolean subtract(ItemStack other) {
+      return subtract(other, true);
+   }
+   
    @Override
    public String toString() {
       return amount + "x " + item;
@@ -57,10 +118,6 @@ class Inventory {
       this.itemstacks.addAll(itemstacks);
    }
    
-   public Inventory(ItemStack... itemstacks) {
-      this(Arrays.asList(itemstacks));
-   }
-   
    public Inventory() {}
    
    public List<ItemStack> getItemStacks() {
@@ -71,8 +128,64 @@ class Inventory {
       this.itemstacks.addAll(itemstacks);
    }
    
-   public void addItemStacks(ItemStack... itemstacks) {
-      addItemStacks(Arrays.asList(itemstacks));
+   public List<ItemStack> getConsolidated() {
+      HashMap<Item, Integer> items = new HashMap<>();
+      
+      for (ItemStack itemstack : itemstacks) {
+         Item item = itemstack.getItem();
+         
+         if (!items.keySet().contains(item)) {
+            items.put(item, itemstack.getAmount());
+         } else {
+            items.put(item, items.get(item) + itemstack.getAmount());
+         }
+      }
+      
+      List<ItemStack> consolidated = new ArrayList<>();
+      
+      for (Item item : items.keySet()) {
+         consolidated.add(new ItemStack(item, items.get(item)));
+      }
+      
+      return consolidated;
+   }
+   
+   public boolean has(List<ItemStack> itemstacks) {
+      List<ItemStack> consolidated = getConsolidated();
+      
+      for (ItemStack otherStack : itemstacks) {
+         boolean flag = false;
+         
+         for (ItemStack itemstack : consolidated) {
+            if (itemstack.has(otherStack)) {
+               flag = true;
+            }
+         }
+         
+         if (!flag) {
+            return false;
+         }
+      }
+      
+      return true;
+   }
+   
+   public boolean subtract(List<ItemStack> itemstacks, boolean check) {
+      if (check && !has(itemstacks)) {
+         return false;
+      }
+      
+      for (ItemStack otherStack : itemstacks) {
+         for (ItemStack itemstack : this.itemstacks) {
+            itemstack.subtract(otherStack);
+         }
+      }
+
+      return true;
+   }
+   
+   public boolean subtract(List<ItemStack> itemstacks) {
+      return subtract(itemstacks, true);
    }
    
    @Override
@@ -80,6 +193,10 @@ class Inventory {
       String inventoryString = "";
       
       for (ItemStack itemstack : itemstacks) {
+         if (itemstack.getAmount() <= 0) {
+            continue;
+         }
+      
          inventoryString += itemstack + ",\n";
       }
       
@@ -127,24 +244,24 @@ class Player extends Entity {
       inventory.addItemStacks(itemstacks);
    }
    
-   public void pickUp(ItemStack... itemstacks) {
-      inventory.addItemStacks(itemstacks);
-   }
-   
    public void kill(Entity other) {
       List<ItemStack> drops = other.die();
       pickUp(drops);
       System.out.println(this + " killed " + other + " and received " + drops);
    }
    
-   @Override
-   public List<ItemStack> getDropItems() {
-      return inventory.getItemStacks();
+   public Inventory getInventory() {
+      return inventory;
    }
    
    public String fullDescription() {
       return "player named " + name + " with items:\n" + inventory;
    } 
+   
+   @Override
+   public List<ItemStack> getDropItems() {
+      return inventory.getItemStacks();
+   }
 }
 
 abstract class Creature extends Entity {
@@ -201,10 +318,6 @@ class Villager extends Creature {
       this.trades.addAll(trades);
    }
    
-   public Villager(String name, VillagerTrade... trades) {
-      this(name, Arrays.asList(trades));
-   }
-   
    @Override
    public List<ItemStack> getDropItems() {
       ArrayList<ItemStack> dropItems = new ArrayList<>(); 
@@ -222,7 +335,7 @@ class VillagerTrade {
       this.sell.addAll(sell);
    }
    
-   public List<ItemStack> trade(ArrayList<ItemStack> items) {
+   public List<ItemStack> trade(Inventory inventory) {
       // TODO
       return null;
    }
