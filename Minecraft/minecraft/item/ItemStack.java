@@ -9,10 +9,6 @@ public class ItemStack {
         this.amount = amount;
     }
 
-    public ItemStack(String name, int amount) {
-        this(new Item(name), amount);
-    }
-
     public Item getItem() {
         return item;
     }

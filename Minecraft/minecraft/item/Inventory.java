@@ -11,7 +11,8 @@ public class Inventory {
         this.itemStacks.addAll(itemStacks);
     }
 
-    public Inventory() {}
+    public Inventory() {
+    }
 
     public List<ItemStack> getItemStacks() {
         return itemStacks;

@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VillagerTrade {
-   private List<ItemStack> buy = new ArrayList<>();
-   private List<ItemStack> sell = new ArrayList<>();;
+    private List<ItemStack> buy = new ArrayList<>();
+    private List<ItemStack> sell = new ArrayList<>();
 
-   public VillagerTrade (List<ItemStack> buy, List<ItemStack> sell) {
-      this.buy.addAll(buy);
-      this.sell.addAll(sell);
-   }
+    public VillagerTrade(List<ItemStack> buy, List<ItemStack> sell) {
+        this.buy.addAll(buy);
+        this.sell.addAll(sell);
+    }
 
-   public List<ItemStack> trade(Inventory inventory) {
-      // TODO
-      return null;
-   }
+    public List<ItemStack> trade(Inventory inventory) {
+        // TODO
+        return null;
+    }
 }

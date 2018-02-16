@@ -5,30 +5,30 @@ import minecraft.item.ItemStack;
 import java.util.List;
 
 public abstract class Entity {
-   protected String name;
-   private boolean dead;
+    protected String name;
+    private boolean dead;
 
-   public Entity(String name) {
-      this.name = name;
-   }
+    public Entity(String name) {
+        this.name = name;
+    }
 
-   public String getName() {
-      return name;
-   }
+    public String getName() {
+        return name;
+    }
 
-   public List<ItemStack> die() {
-      if (this.dead) {
-         return null;
-      }
+    public List<ItemStack> die() {
+        if (this.dead) {
+            return null;
+        }
 
-      this.dead = true;
-      return getDropItems();
-   }
+        this.dead = true;
+        return getDropItems();
+    }
 
-   public abstract List<ItemStack> getDropItems();
+    public abstract List<ItemStack> getDropItems();
 
-   @Override
-   public String toString() {
-      return this.getClass().getSimpleName().toLowerCase() + " named " + name;
-   }
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName().toLowerCase() + " named " + name;
+    }
 }
