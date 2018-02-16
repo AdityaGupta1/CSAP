@@ -1,6 +1,7 @@
 package minecraft.item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -89,7 +90,7 @@ public class Inventory {
 
         for (ItemStack otherStack : itemStacks) {
             for (ItemStack itemstack : this.itemStacks) {
-                itemstack.subtract(otherStack, check);
+                itemstack.subtract(otherStack);
             }
         }
 
@@ -102,6 +103,10 @@ public class Inventory {
 
     public void add(List<ItemStack> itemStacks) {
         this.itemStacks.addAll(itemStacks);
+    }
+
+    public void add(ItemStack... itemStacks) {
+        add(Arrays.asList(itemStacks));
     }
 
     public boolean isEmpty() {
@@ -118,7 +123,7 @@ public class Inventory {
 
         String inventoryString = "";
 
-        for (ItemStack itemstack : itemStacks) {
+        for (ItemStack itemstack : getConsolidated()) {
             if (itemstack.getAmount() <= 0) {
                 continue;
             }

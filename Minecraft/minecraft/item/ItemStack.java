@@ -1,5 +1,10 @@
 package minecraft.item;
 
+import minecraft.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemStack {
     private Item item;
     private int amount;
@@ -7,6 +12,11 @@ public class ItemStack {
     public ItemStack(Item item, int amount) {
         this.item = item;
         this.amount = amount;
+    }
+
+    public ItemStack(Item item, int min, int max) {
+        this.item = item;
+        this.amount = Game.random.nextInt(max + 1 - min) + min;
     }
 
     public Item getItem() {
@@ -66,6 +76,20 @@ public class ItemStack {
 
     public boolean subtract(ItemStack other) {
         return subtract(other, true);
+    }
+
+    public ItemStack copy() {
+        return new ItemStack(item, amount);
+    }
+
+    public static List<ItemStack> copyStacks(List<ItemStack> itemStacks) {
+        List<ItemStack> copy = new ArrayList<>();
+
+        for (ItemStack itemStack : itemStacks) {
+            copy.add(itemStack.copy());
+        }
+
+        return copy;
     }
 
     @Override

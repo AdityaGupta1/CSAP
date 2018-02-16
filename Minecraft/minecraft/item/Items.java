@@ -1,6 +1,9 @@
 package minecraft.item;
 
 public class Items {
+    public static final Item log;
+    public static final Item planks;
+    public static final Item stick;
     public static final Item rotten_flesh;
     public static final Item gunpowder;
     public static final Item raw_beef;
@@ -12,6 +15,9 @@ public class Items {
     public static final Item emerald;
 
     static {
+        log = new Item("log");
+        planks = new Item("planks");
+        stick = new Item("stick");
         rotten_flesh = new Item("rotten flesh");
         gunpowder = new Item("gunpowder");
         raw_beef = new Item("raw beef");

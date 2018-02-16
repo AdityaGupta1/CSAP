@@ -27,10 +27,6 @@ public class VillagerTrade {
         return this;
     }
 
-    public Villager getVillager() {
-        return villager;
-    }
-
     public boolean tradeWith(Player player) {
         Inventory inventory = player.getInventory();
 

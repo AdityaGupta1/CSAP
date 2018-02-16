@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Villager extends Creature {
+    private String name;
+
     private List<VillagerTrade> trades = new ArrayList<>();
 
     public Villager(String name) {
-        super(name);
+        this.name = name;
     }
 
     public void addTrade(VillagerTrade trade) {
@@ -21,10 +23,30 @@ public class Villager extends Creature {
         return trades;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public List<ItemStack> getDropItems() {
         ArrayList<ItemStack> dropItems = new ArrayList<>();
         dropItems.add(new ItemStack(Items.emerald, 1));
         return dropItems;
+    }
+
+    @Override
+    public Entity copy() {
+        Villager villager = new Villager(name);
+
+        for (VillagerTrade trade : trades) {
+            villager.addTrade(trade);
+        }
+
+        return villager;
+    }
+
+    @Override
+    public String toString() {
+        return "villager named " + name;
     }
 }

@@ -9,18 +9,13 @@ import java.util.List;
 public class Zombie extends Monster {
     private boolean isVillager = false;
 
-    public Zombie(String name) {
-        super(name);
-    }
-
-    public Zombie(String name, boolean isVillager) {
-        this(name);
+    public Zombie(boolean isVillager) {
         this.isVillager = isVillager;
     }
 
     public Zombie convertVillager(Villager villager) {
         villager.die();
-        return new Zombie(villager.getName(), true);
+        return new Zombie(true);
     }
 
     @Override
@@ -31,7 +26,12 @@ public class Zombie extends Monster {
     }
 
     @Override
+    public Entity copy() {
+        return new Zombie(isVillager);
+    }
+
+    @Override
     public String toString() {
-        return "zombie " + (isVillager ? "villager " : "") + "named " + name;
+        return "zombie " + (isVillager ? "villager " : "");
     }
 }

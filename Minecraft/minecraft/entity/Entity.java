@@ -5,16 +5,7 @@ import minecraft.item.ItemStack;
 import java.util.List;
 
 public abstract class Entity {
-    protected String name;
     private boolean dead;
-
-    public Entity(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public List<ItemStack> die() {
         if (this.dead) {
@@ -25,10 +16,16 @@ public abstract class Entity {
         return getDropItems();
     }
 
+    public boolean isDead() {
+        return dead;
+    }
+
     public abstract List<ItemStack> getDropItems();
+
+    public abstract Entity copy();
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName().toLowerCase() + " named " + name;
+        return this.getClass().getSimpleName().toLowerCase();
     }
 }

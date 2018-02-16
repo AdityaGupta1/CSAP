@@ -3,7 +3,7 @@ package minecraft.item;
 public class Item {
     private String name;
 
-    public Item(String name) {
+    Item(String name) {
         this.name = name;
     }
 
@@ -13,7 +13,7 @@ public class Item {
 
     @Override
     public boolean equals(Object other) {
-        return (other instanceof Item) && (((Item) other).name == this.name);
+        return (other instanceof Item) && (((Item) other).name.equals(this.name));
     }
 
     @Override
