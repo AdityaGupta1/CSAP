@@ -100,6 +100,10 @@ public class Inventory {
         return subtract(itemStacks, true);
     }
 
+    public void add(List<ItemStack> itemStacks) {
+        this.itemStacks.addAll(itemStacks);
+    }
+
     public boolean isEmpty() {
         update();
 

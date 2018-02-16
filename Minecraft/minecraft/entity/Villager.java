@@ -7,11 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Villager extends Creature {
-    ArrayList<VillagerTrade> trades = new ArrayList<>();
+    private List<VillagerTrade> trades = new ArrayList<>();
 
-    public Villager(String name, List<VillagerTrade> trades) {
+    public Villager(String name) {
         super(name);
-        this.trades.addAll(trades);
+    }
+
+    public void addTrade(VillagerTrade trade) {
+        trades.add(trade.setVillager(this));
+    }
+
+    public List<VillagerTrade> getTrades() {
+        return trades;
     }
 
     @Override
