@@ -1,5 +1,7 @@
 package minecraft.game;
 
+import minecraft.biome.Biome;
+import minecraft.biome.BiomeOcean;
 import minecraft.entity.Player;
 import minecraft.game.crafting.CraftingSystem;
 import minecraft.world.Sky;
@@ -10,7 +12,11 @@ public class Game {
     private boolean run = true;
     private long ticks = 0;
 
+    public static final String controlsMessage = "commands: H = help, R = replay event, I = inventory, C = crafting, E = equipment, S = status";
+
     public static final Player player = new Player("SDOAJ");
+    // TEMPORARY
+    public static Biome currentBiome = new BiomeOcean();
 
     private static final UserInterface ui = new UserInterface();
     public static final CraftingSystem craftingSystem = new CraftingSystem();
@@ -18,8 +24,6 @@ public class Game {
     private static final Sky sky = new Sky();
 
     public static final Random random = new Random();
-
-    public static final String controlsMessage = "commands: H = help, R = replay event, I = inventory, C = crafting, E = equipment, S = status";
 
     public void startLoop() throws InterruptedException {
         System.out.println(controlsMessage + "\n");
@@ -32,7 +36,7 @@ public class Game {
                 sky.incrementTime(1);
 
                 if (getTime() % 60 == 0) {
-                    System.out.println("[the time is: " + Game.getTimeString() + "]");
+                    System.out.println("[ the time is: " + Game.getTimeString() + " ]");
                 }
             }
 

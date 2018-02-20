@@ -30,6 +30,6 @@ public class EventChance {
 
     @Override
     public String toString() {
-        return event + " with " + chance + "% chance";
+        return event + " with " + Math.round(100 * chance) + "% chance";
     }
 }

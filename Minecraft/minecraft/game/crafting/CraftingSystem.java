@@ -32,7 +32,7 @@ public class CraftingSystem {
         String recipesString = "available recipes:\n" + line;
 
         if (availableRecipes.size() == 0) {
-            return recipesString + "none";
+            return recipesString + "none\n" + line;
         }
 
         for (int i = 0; i < availableRecipes.size(); i++) {

@@ -1,9 +1,6 @@
 package minecraft.game.event;
 
-import minecraft.entity.Cow;
-import minecraft.entity.Creeper;
-import minecraft.entity.Pig;
-import minecraft.entity.Zombie;
+import minecraft.entity.*;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
 import minecraft.item.ItemStack;
@@ -20,6 +17,9 @@ public enum Event {
     COW         ("you see a cow",
                     new Response("kill it", ResponseType.KILL_MOB, new Cow()),
                     new Response("ignore it", ResponseType.IGNORE)),
+    SQUID       ("you see a squid",
+                    new Response("kill it", ResponseType.KILL_MOB, new Squid()),
+                    new Response("ignore it", ResponseType.IGNORE)),
     ZOMBIE      ("you see a zombie",
                     new Response("kill it", ResponseType.KILL_MOB, new Zombie(false)),
                     new Response("run away", ResponseType.IGNORE)),
@@ -30,7 +30,7 @@ public enum Event {
     private final String message;
     private final Response[] responses;
     Event(String message, Response... responses) {
-        this.message = "[" + message + "]";
+        this.message = "[ " + message + " ]";
         this.responses = responses;
     }
 

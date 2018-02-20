@@ -1,30 +1,32 @@
 package minecraft.game.event;
 
+import minecraft.biome.Biome;
+import minecraft.biome.BiomeDesert;
+import minecraft.biome.BiomeForest;
+import minecraft.biome.BiomeOcean;
 import minecraft.game.Game;
 
 public class EventGenerator {
-    private static final Event[] creatures = {Event.PIG, Event.COW};
-    private static final Event[] monsters = {Event.ZOMBIE, Event.CREEPER};
+    public static final Event[] creatures = {Event.PIG, Event.COW};
+    public static final Event[] monsters = {Event.ZOMBIE, Event.CREEPER};
+    public static final Event[] ocean = {Event.SQUID};
+
+    private static final Biome[] biomes = {new BiomeForest(), new BiomeDesert(), new BiomeOcean()};
+    private static final double biomeChangeChance = 0.05;
 
     public static Event generate() {
-        WeightedEvents events = new WeightedEvents();
-
-        if (!Game.isNight()) {
-            events.addEventChance(new EventChance(Event.TREE, 0.5));
-            events.addEventChances(EventChance.generateChances(creatures, 0.5));
-        } else {
-            events.addEventChance(new EventChance(Event.TREE, 0.5));
-            events.addEventChances(EventChance.generateChances(monsters, 0.5));
+        if (random(biomeChangeChance)) {
+            // biome change
         }
 
-        return events.generateEvent();
+        return Game.currentBiome.getEvent();
     }
 
     private static boolean random(double probability) {
         return Game.random.nextDouble() > probability;
     }
 
-    private static Event pickRandom(Event[] events) {
-        return events[(int) (Math.random() * events.length)];
+    private static Biome pickRandomBiome() {
+        return biomes[(int) (Math.random() * biomes.length)];
     }
 }
