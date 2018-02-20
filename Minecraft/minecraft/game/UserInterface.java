@@ -1,6 +1,8 @@
 package minecraft.game;
 
 import minecraft.game.crafting.CraftingRecipe;
+import minecraft.game.event.Event;
+import minecraft.game.event.EventGenerator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +48,7 @@ public class UserInterface implements Runnable {
     private void runCommand(String input) {
         command:
         switch (input.toLowerCase()) {
-            case "g":
+            case "h":
                 System.out.println(Game.controlsMessage);
                 break;
             case "r":

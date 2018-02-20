@@ -1,7 +1,5 @@
 package minecraft.game.crafting;
 
-import minecraft.game.Game;
-import minecraft.item.Inventory;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
 
