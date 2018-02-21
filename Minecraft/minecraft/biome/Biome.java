@@ -9,7 +9,7 @@ public abstract class Biome {
     public abstract String getEnterMessage();
 
     public double getLeaveChance() {
-        return 0.05;
+        return 1;
     }
 
     // example: "BiomeExtremeHills" --> "extreme hills"

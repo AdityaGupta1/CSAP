@@ -48,8 +48,12 @@ public class Player extends Entity {
     }
 
     public void enterBiome(Biome biome) {
-        System.out.println(this + " entered a " + biome.getName() + " biome");
+        System.out.println(this + " entered " + aOrAn(biome.getName()) + " biome");
         Game.currentBiome = biome;
+    }
+
+    private String aOrAn(String word) {
+        return (("AEIOUaeiou".indexOf(word.charAt(0)) == -1) ? "a" : "an") + " " + word;
     }
 
     public Inventory getInventory() {
