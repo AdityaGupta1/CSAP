@@ -17,7 +17,7 @@ public class Game {
     public static final String controlsMessage = "commands: H = help, R = replay event, I = inventory, C = crafting, E = equipment, S = status";
 
     public static final Player player = new Player("SDOAJ");
-    public static Biome currentBiome = new BiomeDesert();
+    public static Biome currentBiome = new BiomeForest();
 
     private static final UserInterface ui = new UserInterface();
     public static final CraftingSystem craftingSystem = new CraftingSystem();
@@ -37,7 +37,7 @@ public class Game {
                 sky.incrementTime(1);
 
                 if (getTime() % 60 == 0) {
-                    System.out.println("[ the time is: " + Game.getTimeString() + " ]");
+                    System.out.println("( " + Game.getTimeString() + " )");
                 }
             }
 
