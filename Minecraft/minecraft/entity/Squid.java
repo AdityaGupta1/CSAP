@@ -10,7 +10,7 @@ public class Squid extends Creature {
     @Override
     public List<ItemStack> getDropItems() {
         ArrayList<ItemStack> dropItems = new ArrayList<>();
-        dropItems.add(new ItemStack(Items.ink_sac, 2));
+        dropItems.add(new ItemStack(Items.ink_sac, 1, 3));
         return dropItems;
     }
 

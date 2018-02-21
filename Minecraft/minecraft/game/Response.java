@@ -1,5 +1,6 @@
 package minecraft.game;
 
+import minecraft.biome.Biome;
 import minecraft.entity.Entity;
 import minecraft.item.ItemStack;
 
@@ -28,7 +29,7 @@ public class Response {
                 List<ItemStack> itemStacks = new ArrayList<>();
 
                 for (Object object : consequences) {
-                    itemStacks.add(((ItemStack) object).copy());
+                    itemStacks.add(((ItemStack) object).generate());
                 }
 
                 Game.player.pickUp(itemStacks);
@@ -41,6 +42,9 @@ public class Response {
                 }
 
                 Game.player.kill(entities);
+                break;
+            case ENTER_BIOME:
+                Game.player.enterBiome((Biome) consequences[0]);
                 break;
             case IGNORE:
             default:

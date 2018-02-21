@@ -1,6 +1,8 @@
 package minecraft.game;
 
 import minecraft.biome.Biome;
+import minecraft.biome.BiomeDesert;
+import minecraft.biome.BiomeForest;
 import minecraft.biome.BiomeOcean;
 import minecraft.entity.Player;
 import minecraft.game.crafting.CraftingSystem;
@@ -15,8 +17,7 @@ public class Game {
     public static final String controlsMessage = "commands: H = help, R = replay event, I = inventory, C = crafting, E = equipment, S = status";
 
     public static final Player player = new Player("SDOAJ");
-    // TEMPORARY
-    public static Biome currentBiome = new BiomeOcean();
+    public static Biome currentBiome = new BiomeDesert();
 
     private static final UserInterface ui = new UserInterface();
     public static final CraftingSystem craftingSystem = new CraftingSystem();

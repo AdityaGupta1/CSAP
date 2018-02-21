@@ -1,9 +1,6 @@
 package minecraft.item;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Inventory {
     private List<ItemStack> itemStacks = new ArrayList<>();
@@ -79,6 +76,10 @@ public class Inventory {
         }
 
         return true;
+    }
+    
+    public boolean has(Item item) {
+        return has(Collections.singletonList(new ItemStack(item, 1)));
     }
 
     public boolean subtract(List<ItemStack> itemStacks, boolean check) {

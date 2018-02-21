@@ -10,7 +10,10 @@ import java.util.List;
 public class CraftingSystem {
     private CraftingRecipe[] craftingRecipes = {
             new CraftingRecipe(new ItemStack(Items.planks, 4), new ItemStack(Items.log, 1)),
-            new CraftingRecipe(new ItemStack(Items.stick, 4), new ItemStack(Items.planks, 2))
+            new CraftingRecipe(new ItemStack(Items.stick, 4), new ItemStack(Items.planks, 2)),
+            new CraftingRecipe(new ItemStack(Items.boat, 1), new ItemStack(Items.planks, 5)),
+
+            new CraftingRecipe(new ItemStack(Items.sandstone, 1), new ItemStack(Items.sand, 4))
     };
 
     public List<CraftingRecipe> getAvailableRecipes() {

@@ -10,8 +10,8 @@ public class Cow extends Creature {
     @Override
     public List<ItemStack> getDropItems() {
         ArrayList<ItemStack> dropItems = new ArrayList<>();
-        dropItems.add(new ItemStack(Items.raw_beef, 2));
-        dropItems.add(new ItemStack(Items.leather, 1));
+        dropItems.add(new ItemStack(Items.raw_beef, 1, 3));
+        dropItems.add(new ItemStack(Items.leather, 0, 2));
         return dropItems;
     }
 

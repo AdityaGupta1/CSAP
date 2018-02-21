@@ -12,11 +12,11 @@ public class BiomeForest extends Biome {
         WeightedEvents events = new WeightedEvents();
 
         if (!Game.isNight()) {
-            events.addEventChance(new EventChance(Event.TREE, 0.5));
-            events.addEventChances(EventChance.generateChances(EventGenerator.creatures, 0.5));
+            events.add(new EventChance(Event.TREE, 0.5));
+            events.add(EventChance.generateChances(EventGenerator.CREATURES, 0.5));
         } else {
-            events.addEventChance(new EventChance(Event.TREE, 0.5));
-            events.addEventChances(EventChance.generateChances(EventGenerator.monsters, 0.5));
+            events.add(new EventChance(Event.TREE, 0.5));
+            events.add(EventChance.generateChances(EventGenerator.MONSTERS, 0.5));
         }
 
         return events.generateEvent();
@@ -24,6 +24,6 @@ public class BiomeForest extends Biome {
 
     @Override
     public String getEnterMessage() {
-        return "[ you see trees and hills covering a peaceful forest ]";
+        return "you see trees and hills covering a peaceful forest";
     }
 }

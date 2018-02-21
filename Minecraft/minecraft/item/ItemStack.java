@@ -9,14 +9,20 @@ public class ItemStack {
     private Item item;
     private int amount;
 
+    private boolean isRandom = false;
+    private int min;
+    private int max;
+
     public ItemStack(Item item, int amount) {
         this.item = item;
         this.amount = amount;
     }
 
     public ItemStack(Item item, int min, int max) {
-        this.item = item;
-        this.amount = Game.random.nextInt(max + 1 - min) + min;
+        this(item, Game.random.nextInt(max + 1 - min) + min);
+        isRandom = true;
+        this.min = min;
+        this.max = max;
     }
 
     public Item getItem() {
@@ -29,6 +35,18 @@ public class ItemStack {
 
     public boolean isEmpty() {
         return amount <= 0;
+    }
+
+    public static List<ItemStack> removeEmpty(List<ItemStack> itemStacks) {
+        List<ItemStack> newItemStacks = new ArrayList<>();
+
+        for (ItemStack itemStack : itemStacks) {
+            if (!itemStack.isEmpty()) {
+                newItemStacks.add(itemStack);
+            }
+        }
+
+        return newItemStacks;
     }
 
     @Override
@@ -80,6 +98,14 @@ public class ItemStack {
 
     public ItemStack copy() {
         return new ItemStack(item, amount);
+    }
+
+    public ItemStack generate() {
+        if (this.isRandom) {
+            return new ItemStack(this.item, this.min, this.max);
+        } else {
+            return this.copy();
+        }
     }
 
     public static List<ItemStack> copyStacks(List<ItemStack> itemStacks) {

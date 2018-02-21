@@ -59,6 +59,9 @@ public class UserInterface implements Runnable {
             case "c":
                 System.out.print(Game.craftingSystem.getAvailableRecipesString());
                 List<CraftingRecipe> availableRecipes = Game.craftingSystem.getAvailableRecipes();
+                if (availableRecipes.size() == 0) {
+                    break;
+                }
 
                 int recipe = 0;
                 do {

@@ -7,26 +7,31 @@ import minecraft.biome.BiomeOcean;
 import minecraft.game.Game;
 
 public class EventGenerator {
-    public static final Event[] creatures = {Event.PIG, Event.COW};
-    public static final Event[] monsters = {Event.ZOMBIE, Event.CREEPER};
-    public static final Event[] ocean = {Event.SQUID};
+    public static final Event[] CREATURES = {Event.PIG, Event.COW};
+    public static final Event[] MONSTERS = {Event.ZOMBIE, Event.CREEPER};
+    public static final Event[] OCEAN = {Event.SQUID};
 
-    private static final Biome[] biomes = {new BiomeForest(), new BiomeDesert(), new BiomeOcean()};
-    private static final double biomeChangeChance = 0.05;
+    private static final Biome[] BIOMES = {new BiomeForest(), new BiomeDesert(), new BiomeOcean()};
 
     public static Event generate() {
-        if (random(biomeChangeChance)) {
-            // biome change
+        if (random(Game.currentBiome.getLeaveChance())) {
+            return pickRandomNewBiome().getEnterEvent();
         }
 
         return Game.currentBiome.getEvent();
     }
 
     private static boolean random(double probability) {
-        return Game.random.nextDouble() > probability;
+        return Game.random.nextDouble() < probability;
     }
 
-    private static Biome pickRandomBiome() {
-        return biomes[(int) (Math.random() * biomes.length)];
+    private static Biome pickRandomNewBiome() {
+        Biome biome;
+
+        do {
+            biome = BIOMES[(int) (Math.random() * BIOMES.length)];
+        } while (Game.currentBiome.equals(biome));
+
+        return biome;
     }
 }

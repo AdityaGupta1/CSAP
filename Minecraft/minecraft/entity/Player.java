@@ -1,5 +1,7 @@
 package minecraft.entity;
 
+import minecraft.biome.Biome;
+import minecraft.game.Game;
 import minecraft.item.Inventory;
 import minecraft.item.ItemStack;
 
@@ -43,6 +45,11 @@ public class Player extends Entity {
 
     public void kill(Entity... others) {
         kill(Arrays.asList(others));
+    }
+
+    public void enterBiome(Biome biome) {
+        System.out.println(this + " entered a " + biome.getName() + " biome");
+        Game.currentBiome = biome;
     }
 
     public Inventory getInventory() {

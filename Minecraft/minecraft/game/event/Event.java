@@ -6,30 +6,37 @@ import minecraft.game.ResponseType;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
 
-public enum Event {
-    // generics
-    TREE        ("you see a tree",
-                    new Response("chop it down", ResponseType.GET_ITEM, new ItemStack(Items.log, 3)),
-                    new Response("ignore it", ResponseType.IGNORE)),
-    PIG         ("you see a pig",
+public class Event {
+    public static final Event TREE = new Event("you see a tree",
+                    new Response("chop it down", ResponseType.GET_ITEM, new ItemStack(Items.log, 4, 6)),
+                    new Response("ignore it", ResponseType.IGNORE));
+    public static final Event SAND = new Event("you see sand",
+            new Response("dig some sand", ResponseType.GET_ITEM, new ItemStack(Items.sand, 15, 25)),
+            new Response("ignore it", ResponseType.IGNORE));
+    public static final Event CACTUS = new Event("you see a cactus",
+            new Response("chop it down", ResponseType.GET_ITEM, new ItemStack(Items.cactus, 1, 4)),
+            new Response("ignore it", ResponseType.IGNORE));
+
+    public static final Event PIG = new Event("you see a pig",
                     new Response("kill it", ResponseType.KILL_MOB, new Pig()),
-                    new Response("ignore it", ResponseType.IGNORE)),
-    COW         ("you see a cow",
+                    new Response("ignore it", ResponseType.IGNORE));
+    public static final Event COW  = new Event("you see a cow",
                     new Response("kill it", ResponseType.KILL_MOB, new Cow()),
-                    new Response("ignore it", ResponseType.IGNORE)),
-    SQUID       ("you see a squid",
+                    new Response("ignore it", ResponseType.IGNORE));
+    public static final Event SQUID = new Event("you see a squid",
                     new Response("kill it", ResponseType.KILL_MOB, new Squid()),
-                    new Response("ignore it", ResponseType.IGNORE)),
-    ZOMBIE      ("you see a zombie",
+                    new Response("ignore it", ResponseType.IGNORE));
+
+    public static final Event ZOMBIE = new Event("you see a zombie",
                     new Response("kill it", ResponseType.KILL_MOB, new Zombie(false)),
-                    new Response("run away", ResponseType.IGNORE)),
-    CREEPER     ("you see a creeper",
+                    new Response("run away", ResponseType.IGNORE));
+    public static final Event CREEPER = new Event("you see a creeper",
                     new Response("kill it", ResponseType.KILL_MOB, new Creeper()),
                     new Response("run away", ResponseType.IGNORE));
 
     private final String message;
     private final Response[] responses;
-    Event(String message, Response... responses) {
+    public Event(String message, Response... responses) {
         this.message = "[ " + message + " ]";
         this.responses = responses;
     }

@@ -8,12 +8,7 @@ public class WeightedEvents {
     private List<EventChance> events = new ArrayList<>();
     private Map<Event, ChanceRange> eventChances = new HashMap<>();
 
-    public void addEventChance(EventChance eventChance) {
-        events.add(eventChance);
-        generateChances();
-    }
-
-    public void addEventChances(EventChance... eventChances) {
+    public void add(EventChance... eventChances) {
         events.addAll(Arrays.asList(eventChances));
         generateChances();
     }

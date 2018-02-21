@@ -12,9 +12,10 @@ public class BiomeDesert extends Biome {
         WeightedEvents events = new WeightedEvents();
 
         if (!Game.isNight()) {
-            events.addEventChances(EventChance.generateChances(EventGenerator.creatures, 1));
+            events.add(new EventChance(Event.SAND, 0.5));
+            events.add(new EventChance(Event.CACTUS, 0.5));
         } else {
-            events.addEventChances(EventChance.generateChances(EventGenerator.monsters, 1));
+            events.add(EventChance.generateChances(EventGenerator.MONSTERS, 1));
         }
 
         return events.generateEvent();
@@ -22,6 +23,6 @@ public class BiomeDesert extends Biome {
 
     @Override
     public String getEnterMessage() {
-        return "[ you see sand and cacti, signs of a desert ]";
+        return "you see sand and cacti, signaling a desert";
     }
 }

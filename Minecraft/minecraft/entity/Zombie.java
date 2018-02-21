@@ -21,7 +21,7 @@ public class Zombie extends Monster {
     @Override
     public List<ItemStack> getDropItems() {
         ArrayList<ItemStack> dropItems = new ArrayList<>();
-        dropItems.add(new ItemStack(Items.rotten_flesh, 2));
+        dropItems.add(new ItemStack(Items.rotten_flesh, 1, 3));
         return dropItems;
     }
 

@@ -10,7 +10,7 @@ public class Pig extends Creature {
     @Override
     public List<ItemStack> getDropItems() {
         ArrayList<ItemStack> dropItems = new ArrayList<>();
-        dropItems.add(new ItemStack(Items.raw_pork, 2));
+        dropItems.add(new ItemStack(Items.raw_pork, 1, 3));
         return dropItems;
     }
 

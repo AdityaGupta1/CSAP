@@ -13,7 +13,7 @@ public abstract class Entity {
         }
 
         this.dead = true;
-        return getDropItems();
+        return ItemStack.removeEmpty(getDropItems());
     }
 
     public boolean isDead() {
