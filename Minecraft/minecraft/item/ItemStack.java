@@ -72,28 +72,14 @@ public class ItemStack {
         return hasItem(other) && hasAmount(other);
     }
 
-    public boolean subtract(ItemStack other, boolean check) {
-        if (!hasItem(other)) {
+    public boolean subtract(ItemStack other) {
+        if (!has(other)) {
             return false;
         }
 
-        if (check && !has(other)) {
-            return false;
-        }
-
-        if (has(other)) {
-            this.amount -= other.amount;
-            other.amount = 0;
-        } else {
-            other.amount -= this.amount;
-            this.amount = 0;
-        }
+        this.amount -= other.amount;
 
         return true;
-    }
-
-    public boolean subtract(ItemStack other) {
-        return subtract(other, true);
     }
 
     public ItemStack copy() {
@@ -104,18 +90,8 @@ public class ItemStack {
         if (this.isRandom) {
             return new ItemStack(this.item, this.min, this.max);
         } else {
-            return this.copy();
+            return this;
         }
-    }
-
-    public static List<ItemStack> copyStacks(List<ItemStack> itemStacks) {
-        List<ItemStack> copy = new ArrayList<>();
-
-        for (ItemStack itemStack : itemStacks) {
-            copy.add(itemStack.copy());
-        }
-
-        return copy;
     }
 
     @Override

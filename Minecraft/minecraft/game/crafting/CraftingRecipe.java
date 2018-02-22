@@ -1,10 +1,9 @@
 package minecraft.game.crafting;
 
 import minecraft.game.Game;
-import minecraft.item.Inventory;
+import minecraft.entity.player.Inventory;
 import minecraft.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,15 +21,15 @@ public class CraftingRecipe {
     }
 
     public void craft() {
-        Inventory inventory = Game.player.getInventory();
-
         if (!canCraft()) {
             return;
         }
 
+        Inventory inventory = Game.player.getInventory();
+
         System.out.println(Game.player + " crafted " + result + " from " + ingredients);
 
-        inventory.subtract(ItemStack.copyStacks(ingredients));
+        inventory.subtract(ingredients);
         inventory.add(result);
     }
 

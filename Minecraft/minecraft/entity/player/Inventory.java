@@ -1,4 +1,9 @@
-package minecraft.item;
+package minecraft.entity.player;
+
+import minecraft.item.EquipmentType;
+import minecraft.item.Item;
+import minecraft.item.ItemEquipment;
+import minecraft.item.ItemStack;
 
 import java.util.*;
 
@@ -36,9 +41,15 @@ public class Inventory {
         update();
 
         HashMap<Item, Integer> items = new HashMap<>();
+        List<ItemStack> singletons = new ArrayList<>();
 
         for (ItemStack itemstack : itemStacks) {
             Item item = itemstack.getItem();
+
+            if (item.isSingleton()) {
+                singletons.add(itemstack);
+                continue;
+            }
 
             if (!items.keySet().contains(item)) {
                 items.put(item, itemstack.getAmount());
@@ -53,7 +64,30 @@ public class Inventory {
             consolidated.add(new ItemStack(item, items.get(item)));
         }
 
+        consolidated.addAll(singletons);
+
         return consolidated;
+    }
+
+    public Map<EquipmentType, List<ItemEquipment>> getEquipment() {
+        update();
+
+        Map<EquipmentType, List<ItemEquipment>> equipment = new HashMap<>();
+        for (EquipmentType type : EquipmentType.values()) {
+            equipment.put(type, new ArrayList<>());
+        }
+
+        boolean hasEquipment = false;
+
+        for (ItemStack itemStack : itemStacks) {
+            if (itemStack.getItem() instanceof ItemEquipment) {
+                ItemEquipment item = (ItemEquipment) itemStack.getItem();
+                equipment.get(item.getType()).add(item);
+                hasEquipment = true;
+            }
+        }
+
+        return hasEquipment ? equipment : null;
     }
 
     public boolean has(List<ItemStack> itemStacks) {
@@ -82,10 +116,10 @@ public class Inventory {
         return has(Collections.singletonList(new ItemStack(item, 1)));
     }
 
-    public boolean subtract(List<ItemStack> itemStacks, boolean check) {
+    public boolean subtract(List<ItemStack> itemStacks) {
         update();
 
-        if (check && !has(itemStacks)) {
+        if (!has(itemStacks)) {
             return false;
         }
 
@@ -98,8 +132,8 @@ public class Inventory {
         return true;
     }
 
-    public boolean subtract(List<ItemStack> itemStacks) {
-        return subtract(itemStacks, true);
+    public boolean subtract(ItemStack... itemStacks) {
+        return subtract(Arrays.asList(itemStacks));
     }
 
     public void add(List<ItemStack> itemStacks) {

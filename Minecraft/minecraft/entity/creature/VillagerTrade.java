@@ -1,9 +1,9 @@
-package minecraft.entity;
+package minecraft.entity.creature;
 
-import minecraft.item.Inventory;
+import minecraft.entity.player.Inventory;
+import minecraft.entity.player.Player;
 import minecraft.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

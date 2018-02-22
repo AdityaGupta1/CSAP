@@ -1,5 +1,6 @@
-package minecraft.entity;
+package minecraft.entity.creature;
 
+import minecraft.entity.Entity;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
 import minecraft.game.event.Event;
@@ -9,10 +10,10 @@ import minecraft.item.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Squid extends Creature {
+public class Cow extends Creature {
     @Override
     public Event create() {
-        return new Event("you look at the squid swimming lazily",
+        return new Event("you look at the cow grazing",
                 new Response("strike it", ResponseType.FIGHT, this),
                 new Response("ignore it", ResponseType.IGNORE));
     }
@@ -20,12 +21,13 @@ public class Squid extends Creature {
     @Override
     public List<ItemStack> getDropItems() {
         ArrayList<ItemStack> dropItems = new ArrayList<>();
-        dropItems.add(new ItemStack(Items.ink_sac, 1, 3));
+        dropItems.add(new ItemStack(Items.raw_beef, 1, 3));
+        dropItems.add(new ItemStack(Items.leather, 0, 2));
         return dropItems;
     }
 
     @Override
     public Entity copy() {
-        return new Squid();
+        return new Cow();
     }
 }

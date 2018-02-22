@@ -1,5 +1,7 @@
-package minecraft.entity;
+package minecraft.entity.monster;
 
+import minecraft.entity.Entity;
+import minecraft.entity.creature.Villager;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
 import minecraft.game.event.Event;

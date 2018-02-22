@@ -1,10 +1,8 @@
 package minecraft.game;
 
 import minecraft.biome.Biome;
-import minecraft.biome.BiomeDesert;
 import minecraft.biome.BiomeForest;
-import minecraft.biome.BiomeOcean;
-import minecraft.entity.Player;
+import minecraft.entity.player.Player;
 import minecraft.game.crafting.CraftingSystem;
 import minecraft.world.Sky;
 
@@ -14,7 +12,7 @@ public class Game {
     private boolean run = true;
     private long ticks = 0;
 
-    public static final String controlsMessage = "commands: H = help, R = replay event, I = inventory, C = crafting, E = equipment, S = status";
+    public static final String controlsMessage = "commands: H = help, R = replay event, I = inventory, C = crafting, E = equipment, S = status, Q = quit";
 
     public static final Player player = new Player("SDOAJ");
     public static Biome currentBiome = new BiomeForest();

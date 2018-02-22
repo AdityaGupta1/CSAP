@@ -8,6 +8,7 @@ public class ItemWithDurability extends Item {
     ItemWithDurability(String name, int maxDurability) {
         super(name);
         this.maxDurability = maxDurability;
+        this.durability = maxDurability;
     }
 
     ItemWithDurability(String name, int maxDurability, int durability) {
@@ -33,5 +34,15 @@ public class ItemWithDurability extends Item {
 
     public boolean isBroken() {
         return broken;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (durability: " + durability + "/" + maxDurability + ")";
     }
 }

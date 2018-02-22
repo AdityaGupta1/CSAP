@@ -1,10 +1,9 @@
-package minecraft.entity;
+package minecraft.entity.player;
 
 import minecraft.biome.Biome;
+import minecraft.entity.Entity;
 import minecraft.game.Game;
-import minecraft.game.ResponseType;
 import minecraft.game.event.Event;
-import minecraft.item.Inventory;
 import minecraft.item.ItemStack;
 
 import java.util.Arrays;
@@ -14,6 +13,7 @@ public class Player extends Entity {
     private String name;
 
     private Inventory inventory = new Inventory();
+    private PlayerEquipment equipment = new PlayerEquipment();
 
     public Player(String name) {
         this.name = name;
@@ -72,6 +72,10 @@ public class Player extends Entity {
 
     public String getName() {
         return name;
+    }
+
+    public PlayerEquipment getEquipment() {
+        return equipment;
     }
 
     @Override

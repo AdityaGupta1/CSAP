@@ -1,5 +1,6 @@
-package minecraft.entity;
+package minecraft.entity.creature;
 
+import minecraft.entity.Entity;
 import minecraft.game.event.Event;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;

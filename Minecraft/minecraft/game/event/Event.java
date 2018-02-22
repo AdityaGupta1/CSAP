@@ -1,6 +1,10 @@
 package minecraft.game.event;
 
-import minecraft.entity.*;
+import minecraft.entity.creature.Cow;
+import minecraft.entity.creature.Pig;
+import minecraft.entity.creature.Squid;
+import minecraft.entity.monster.Creeper;
+import minecraft.entity.monster.Zombie;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
 import minecraft.item.ItemStack;

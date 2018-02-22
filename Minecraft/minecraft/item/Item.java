@@ -11,9 +11,13 @@ public class Item {
         return name;
     }
 
+    public boolean isSingleton() {
+        return false;
+    }
+
     @Override
     public boolean equals(Object other) {
-        return (other instanceof Item) && (((Item) other).name.equals(this.name));
+        return (other instanceof Item) && other.toString().equals(this.toString());
     }
 
     @Override

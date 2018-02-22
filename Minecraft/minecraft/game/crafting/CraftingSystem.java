@@ -1,5 +1,6 @@
 package minecraft.game.crafting;
 
+import minecraft.game.Util;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
 
@@ -13,7 +14,9 @@ public class CraftingSystem {
             new CraftingRecipe(new ItemStack(Items.stick, 4), new ItemStack(Items.planks, 2)),
             new CraftingRecipe(new ItemStack(Items.boat, 1), new ItemStack(Items.planks, 5)),
 
-            new CraftingRecipe(new ItemStack(Items.wooden_sword, 1), new ItemStack(Items.stick, 1), new ItemStack(Items.planks, 2)),
+            new CraftingRecipe(new ItemStack(Items.wooden_sword, 1), new ItemStack(Items.stick, 1),
+                    new ItemStack(Items.planks, 2)),
+            new CraftingRecipe(new ItemStack(Items.test_sword, 1), new ItemStack(Items.log, 1)),
 
             new CraftingRecipe(new ItemStack(Items.sandstone, 1), new ItemStack(Items.sand, 4))
     };
@@ -31,21 +34,17 @@ public class CraftingSystem {
     }
 
     public String getAvailableRecipesString() {
-        String line = "--------------------------------------------------------------\n";
-
         List<CraftingRecipe> availableRecipes = getAvailableRecipes();
-        String recipesString = "available recipes:\n" + line;
+        String recipesString = "";
 
         if (availableRecipes.size() == 0) {
-            return recipesString + "none\n" + line;
+            recipesString = "none";
+        } else {
+            for (int i = 0; i < availableRecipes.size(); i++) {
+                recipesString += (i + 1) + ") " + availableRecipes.get(i) + "\n";
+            }
         }
 
-        for (int i = 0; i < availableRecipes.size(); i++) {
-            recipesString += (i + 1) + ") " + availableRecipes.get(i) + "\n";
-        }
-
-        recipesString += line;
-
-        return recipesString;
+        return "available recipes:" + Util.wrap(recipesString.substring(0, recipesString.length() - 1), true);
     }
 }
