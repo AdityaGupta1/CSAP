@@ -27,7 +27,7 @@ public class CraftingRecipe {
 
         Inventory inventory = Game.player.getInventory();
 
-        System.out.println(Game.player + " crafted " + result + " from " + ingredients);
+        System.out.println(Game.player + " crafted [" + result + "] from " + ingredients);
 
         inventory.subtract(ingredients);
         inventory.add(result);
