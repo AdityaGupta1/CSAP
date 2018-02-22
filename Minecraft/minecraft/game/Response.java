@@ -2,9 +2,12 @@ package minecraft.game;
 
 import minecraft.biome.Biome;
 import minecraft.entity.Entity;
+import minecraft.entity.player.Player;
 import minecraft.game.event.EventCreator;
 import minecraft.game.event.EventGenerator;
+import minecraft.item.EquipmentType;
 import minecraft.item.ItemStack;
+import minecraft.item.ItemWithDurability;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,21 +28,33 @@ public class Response {
     }
 
     public void doConsequence() {
+        Player player = Game.player;
+
         switch(type) {
             case GET_ITEM:
                 List<ItemStack> itemStacks = new ArrayList<>();
 
-                for (Object object : consequences) {
-                    itemStacks.add(((ItemStack) object).generate());
+                for (int i = 1; i < consequences.length; i++) {
+                    itemStacks.add(((ItemStack) consequences[i]).generate());
                 }
 
-                Game.player.pickUp(itemStacks);
+                EquipmentType type = (EquipmentType) consequences[0];
+                double modifier = player.getEquipment().getModifier(type);
+
+                for (ItemStack itemStack : itemStacks) {
+                    itemStack.multiplyAmount(modifier);
+
+                    if (modifier != 1) {
+                        ((ItemWithDurability) player.getEquipment().get(type)).damage(itemStack.getAmount());
+                    }
+                }
+
+                player.pickUp(itemStacks);
                 break;
             case FIGHT:
                 Entity entity = ((Entity) consequences[0]).copy();
 
-                // will change to striking with equipped weapon instead of auto kill
-                Game.player.kill(entity);
+                player.damage(entity);
 
                 if (entity.isDead()) {
                     EventGenerator.resetEventCreator();
@@ -47,7 +62,7 @@ public class Response {
 
                 break;
             case ENTER_BIOME:
-                Game.player.enterBiome((Biome) consequences[0]);
+                player.enterBiome((Biome) consequences[0]);
                 EventGenerator.changeEventCreator(Game.currentBiome);
                 break;
             case CHANGE:

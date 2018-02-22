@@ -1,6 +1,7 @@
 package minecraft.entity.creature;
 
 import minecraft.entity.Entity;
+import minecraft.entity.EntityStatus;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
 import minecraft.game.event.Event;
@@ -11,6 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pig extends Creature {
+    private EntityStatus status = new EntityStatus(8);
+
+    public Pig() {
+
+    }
+
+    public Pig(EntityStatus status) {
+        this.status = status;
+    }
+
+    @Override
+    public EntityStatus getStatus() {
+        return status;
+    }
+
     @Override
     public Event create() {
         return new Event("you look at the pig grazing",
@@ -27,6 +43,6 @@ public class Pig extends Creature {
 
     @Override
     public Entity copy() {
-        return new Pig();
+        return new Pig(status);
     }
 }

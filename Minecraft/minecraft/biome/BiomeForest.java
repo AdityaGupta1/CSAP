@@ -16,10 +16,10 @@ public class BiomeForest extends Biome {
         WeightedEvents events = new WeightedEvents();
 
         if (!Game.isNight()) {
-            events.add(new EventChance(Event.TREE, 0.5));
+            events.add(new EventChance(Event.TREES, 0.5));
             events.add(EventChance.generateChances(EventGenerator.CREATURES, 0.5));
         } else {
-            events.add(new EventChance(Event.TREE, 0.5));
+            events.add(new EventChance(Event.TREES, 0.5));
             events.add(EventChance.generateChances(EventGenerator.MONSTERS, 0.5));
         }
 

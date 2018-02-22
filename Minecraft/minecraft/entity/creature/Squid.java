@@ -1,6 +1,7 @@
 package minecraft.entity.creature;
 
 import minecraft.entity.Entity;
+import minecraft.entity.EntityStatus;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
 import minecraft.game.event.Event;
@@ -11,6 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Squid extends Creature {
+    private EntityStatus status = new EntityStatus(8);
+
+    public Squid() {
+
+    }
+
+    public Squid(EntityStatus status) {
+        this.status = status;
+    }
+
+    @Override
+    public EntityStatus getStatus() {
+        return status;
+    }
+
     @Override
     public Event create() {
         return new Event("you look at the squid swimming lazily",
@@ -27,6 +43,6 @@ public class Squid extends Creature {
 
     @Override
     public Entity copy() {
-        return new Squid();
+        return new Squid(status);
     }
 }

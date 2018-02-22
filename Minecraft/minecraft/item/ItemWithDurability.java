@@ -17,10 +17,20 @@ public class ItemWithDurability extends Item {
     }
 
     public void damage() {
+        if (broken) {
+            return;
+        }
+
         durability--;
 
         if (durability == 0) {
             broken = true;
+        }
+    }
+
+    public void damage(int times) {
+        for (int i = 0; i < times; i++) {
+            damage();
         }
     }
 

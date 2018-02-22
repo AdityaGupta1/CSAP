@@ -6,20 +6,28 @@ import minecraft.item.ItemStack;
 import java.util.List;
 
 public abstract class Entity implements EventCreator {
-    private boolean dead;
+    public abstract EntityStatus getStatus();
 
-    public List<ItemStack> die() {
-        if (this.dead) {
-            return null;
+    public List<ItemStack> damage(int damage) {
+        getStatus().damage(damage);
+
+        if (getStatus().isDead()) {
+            return ItemStack.removeEmpty(getDropItems());
         }
 
-        this.dead = true;
-
-        return ItemStack.removeEmpty(getDropItems());
+        return null;
     }
 
     public boolean isDead() {
-        return dead;
+        return getStatus().isDead();
+    }
+
+    public void setDead(boolean dead) {
+        getStatus().setDead(dead);
+    }
+
+    public void setDead() {
+        setDead(true);
     }
 
     public abstract List<ItemStack> getDropItems();

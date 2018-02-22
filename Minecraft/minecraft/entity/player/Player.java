@@ -2,14 +2,18 @@ package minecraft.entity.player;
 
 import minecraft.biome.Biome;
 import minecraft.entity.Entity;
+import minecraft.entity.EntityStatus;
 import minecraft.game.Game;
 import minecraft.game.event.Event;
 import minecraft.item.ItemStack;
+import minecraft.item.ItemWithDurability;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Player extends Entity {
+    private EntityStatus status = new EntityStatus(20);
+
     private String name;
 
     private Inventory inventory = new Inventory();
@@ -19,34 +23,22 @@ public class Player extends Entity {
         this.name = name;
     }
 
-    private Player(String name, Inventory inventory) {
-        this(name);
-        this.inventory = inventory;
-    }
-
     public void pickUp(List<ItemStack> itemStacks) {
         inventory.addItemStacks(itemStacks);
         System.out.println(this + " picked up " + itemStacks);
     }
 
-    public void kill(Entity other) {
-        List<ItemStack> drops = other.die();
-        System.out.println(this + " killed " + other + ", which dropped " + drops);
-        pickUp(drops);
-    }
+    public void damage(Entity other) {
+        List<ItemStack> drops = other.damage(getAttackDamage());
 
-    public void kill(List<Entity> others) {
-        for (Entity other : others) {
-            if (other.isDead()) {
-                return;
-            }
-
-            kill(other);
+        if (drops == null) {
+            System.out.println(this + " hit " + other + " for " + getAttackDamage() + " damage");
+        } else {
+            System.out.println(this + " killed " + other + ", which dropped " + drops);
+            pickUp(drops);
         }
-    }
 
-    public void kill(Entity... others) {
-        kill(Arrays.asList(others));
+        ((ItemWithDurability) equipment.getAttackTool()).damage();
     }
 
     public void enterBiome(Biome biome) {
@@ -70,12 +62,17 @@ public class Player extends Entity {
         System.out.println(fullDescription());
     }
 
-    public String getName() {
-        return name;
-    }
-
     public PlayerEquipment getEquipment() {
         return equipment;
+    }
+
+    public int getAttackDamage() {
+        return equipment.getAttackDamage();
+    }
+
+    @Override
+    public EntityStatus getStatus() {
+        return status;
     }
 
     @Override
@@ -90,7 +87,7 @@ public class Player extends Entity {
 
     @Override
     public Entity copy() {
-        return new Player(name, inventory);
+        return null;
     }
 
     @Override

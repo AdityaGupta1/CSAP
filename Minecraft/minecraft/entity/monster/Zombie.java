@@ -1,6 +1,7 @@
 package minecraft.entity.monster;
 
 import minecraft.entity.Entity;
+import minecraft.entity.EntityStatus;
 import minecraft.entity.creature.Villager;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
@@ -12,15 +13,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Zombie extends Monster {
+    private EntityStatus status = new EntityStatus(20);
+
     private boolean isVillager = false;
 
     public Zombie(boolean isVillager) {
         this.isVillager = isVillager;
     }
 
+    public Zombie(EntityStatus status) {
+        this.status = status;
+    }
+
+    public Zombie(EntityStatus status, boolean isVillager) {
+        this(status);
+        this.isVillager = isVillager;
+    }
+
     public Zombie convertVillager(Villager villager) {
-        villager.die();
-        return new Zombie(true);
+        villager.setDead();
+        return new Zombie(status, true);
+    }
+
+    @Override
+    public EntityStatus getStatus() {
+        return status;
     }
 
     @Override
@@ -39,7 +56,7 @@ public class Zombie extends Monster {
 
     @Override
     public Entity copy() {
-        return new Zombie(isVillager);
+        return new Zombie(status, isVillager);
     }
 
     @Override

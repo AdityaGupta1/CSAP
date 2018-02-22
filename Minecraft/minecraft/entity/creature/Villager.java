@@ -1,6 +1,7 @@
 package minecraft.entity.creature;
 
 import minecraft.entity.Entity;
+import minecraft.entity.EntityStatus;
 import minecraft.game.event.Event;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
@@ -9,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Villager extends Creature {
-    private String name;
+    private EntityStatus status = new EntityStatus(20);
+
+    public Villager(EntityStatus status) {
+        this.status = status;
+    }
 
     private List<VillagerTrade> trades = new ArrayList<>();
-
-    public Villager(String name) {
-        this.name = name;
-    }
 
     public void addTrade(VillagerTrade trade) {
         trades.add(trade.setVillager(this));
@@ -25,8 +26,9 @@ public class Villager extends Creature {
         return trades;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public EntityStatus getStatus() {
+        return status;
     }
 
     @Override
@@ -43,17 +45,12 @@ public class Villager extends Creature {
 
     @Override
     public Entity copy() {
-        Villager villager = new Villager(name);
+        Villager villager = new Villager(status);
 
         for (VillagerTrade trade : trades) {
             villager.addTrade(trade);
         }
 
         return villager;
-    }
-
-    @Override
-    public String toString() {
-        return "villager named " + name;
     }
 }

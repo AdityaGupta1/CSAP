@@ -41,32 +41,59 @@ public class PlayerEquipment {
     }
 
     public ItemEquipment get(EquipmentType type) {
+        ItemEquipment item;
+
         switch(type) {
             case SWORD:
-                return sword;
+                item = sword;
+                break;
             case AXE:
-                return axe;
+                item = axe;
+                break;
             case PICKAXE:
-                return pickaxe;
+                item = pickaxe;
+                break;
             case SHOVEL:
-                return shovel;
+                item = shovel;
+                break;
             case HELMET:
-                return helmet;
+                item = helmet;
+                break;
             case CHESTPLATE:
-                return chestplate;
+                item = chestplate;
+                break;
             case LEGGINGS:
-                return leggings;
+                item = leggings;
+                break;
             case BOOTS:
-                return boots;
+                item = boots;
+                break;
             default:
                 return null;
         }
+
+        if (item == null) {
+            return null;
+        }
+
+        if (((ItemWithDurability) item).isBroken()) {
+            set(type, null);
+            return null;
+        }
+
+        return item;
     }
 
-    public ItemEquipment swap(ItemEquipment item) {
-        ItemEquipment previous = get(item.getType());
+    public double getModifier(EquipmentType type) {
+        if (type == null || get(type) == null) {
+            return 1;
+        }
 
-        switch(item.getType()) {
+        return get(type).getModifier();
+    }
+
+    private void set(EquipmentType type, ItemEquipment item) {
+        switch(type) {
             case SWORD:
                 sword = item;
                 break;
@@ -94,6 +121,12 @@ public class PlayerEquipment {
             default:
                 break;
         }
+    }
+
+    public ItemEquipment swap(ItemEquipment item) {
+        ItemEquipment previous = get(item.getType());
+
+        set(item.getType(), item);
 
         if (previous != null) {
             Game.player.getInventory().add(new ItemStack((Item) previous, 1));
@@ -109,7 +142,7 @@ public class PlayerEquipment {
 
     @Override
     public String toString() {
-        return "current equipment: " + Util.line(true) +
+        return Util.wrap("current equipment: ", false, true) +
                 "sword: " + (sword == null ? "none" : sword) + ",\n" +
                 "axe: " + (axe == null ? "none" : axe)  + ",\n" +
                 "pickaxe: " + (pickaxe == null ? "none" : pickaxe)  + ", \n" +

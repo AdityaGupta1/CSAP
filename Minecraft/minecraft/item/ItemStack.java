@@ -33,6 +33,10 @@ public class ItemStack {
         return amount;
     }
 
+    public void multiplyAmount(double multiplier) {
+        this.amount = (int) Math.round(this.amount * multiplier);
+    }
+
     public boolean isEmpty() {
         return amount <= 0;
     }
@@ -47,17 +51,6 @@ public class ItemStack {
         }
 
         return newItemStacks;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof ItemStack)) {
-            return false;
-        }
-
-        ItemStack otherItemStack = (ItemStack) other;
-
-        return (otherItemStack.item.equals(this.item)) && (otherItemStack.amount == this.amount);
     }
 
     public boolean hasItem(ItemStack other) {
@@ -92,6 +85,17 @@ public class ItemStack {
         } else {
             return this;
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof ItemStack)) {
+            return false;
+        }
+
+        ItemStack otherItemStack = (ItemStack) other;
+
+        return (otherItemStack.item.equals(this.item)) && (otherItemStack.amount == this.amount);
     }
 
     @Override

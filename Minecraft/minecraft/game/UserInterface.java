@@ -103,7 +103,7 @@ public class UserInterface implements Runnable {
                         continue;
                     }
 
-                    System.out.println(Util.wrap(type, true, false));
+                    System.out.println(Util.wrap(type.toString().toLowerCase(), true, false));
 
                     for (ItemEquipment singleEquipment : equipmentOfType) {
                         equipment.add(singleEquipment);

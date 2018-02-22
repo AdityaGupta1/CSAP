@@ -7,18 +7,19 @@ import minecraft.entity.monster.Creeper;
 import minecraft.entity.monster.Zombie;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
+import minecraft.item.EquipmentType;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
 
 public class Event {
-    public static final Event TREE = new Event("you see a tree",
-                    new Response("chop it down", ResponseType.GET_ITEM, new ItemStack(Items.log, 4, 6)),
-                    new Response("ignore it", ResponseType.IGNORE));
+    public static final Event TREES = new Event("you see trees",
+            new Response("chop them down", ResponseType.GET_ITEM, EquipmentType.AXE, new ItemStack(Items.log, 4, 6)),
+            new Response("ignore it", ResponseType.IGNORE));
     public static final Event SAND = new Event("you see sand",
-            new Response("dig some sand", ResponseType.GET_ITEM, new ItemStack(Items.sand, 15, 25)),
+            new Response("dig some sand", ResponseType.GET_ITEM, EquipmentType.SHOVEL, new ItemStack(Items.sand, 15, 25)),
             new Response("ignore it", ResponseType.IGNORE));
     public static final Event CACTUS = new Event("you see a cactus",
-            new Response("chop it down", ResponseType.GET_ITEM, new ItemStack(Items.cactus, 1, 4)),
+            new Response("chop it down", ResponseType.GET_ITEM, null, new ItemStack(Items.cactus, 1, 4)),
             new Response("ignore it", ResponseType.IGNORE));
 
     public static final Event PIG = new Event("you see a pig",

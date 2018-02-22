@@ -119,6 +119,8 @@ public class Inventory {
     public boolean subtract(List<ItemStack> itemStacks) {
         update();
 
+        itemStacks = new ArrayList<>(itemStacks);
+
         if (!has(itemStacks)) {
             return false;
         }
@@ -133,15 +135,17 @@ public class Inventory {
     }
 
     public boolean subtract(ItemStack... itemStacks) {
-        return subtract(Arrays.asList(itemStacks));
+        return subtract(Arrays.asList(Arrays.copyOf(itemStacks, itemStacks.length)));
     }
 
     public void add(List<ItemStack> itemStacks) {
-        this.itemStacks.addAll(itemStacks);
+        this.itemStacks.addAll(new ArrayList<>(itemStacks));
     }
 
     public void add(ItemStack... itemStacks) {
-        add(Arrays.asList(itemStacks));
+        for (ItemStack itemStack : itemStacks) {
+            this.itemStacks.add(itemStack.copy());
+        }
     }
 
     public boolean isEmpty() {

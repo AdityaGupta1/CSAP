@@ -16,7 +16,8 @@ public class CraftingSystem {
 
             new CraftingRecipe(new ItemStack(Items.wooden_sword, 1), new ItemStack(Items.stick, 1),
                     new ItemStack(Items.planks, 2)),
-            new CraftingRecipe(new ItemStack(Items.test_sword, 1), new ItemStack(Items.log, 1)),
+            new CraftingRecipe(new ItemStack(Items.wooden_axe, 1), new ItemStack(Items.stick, 2),
+                    new ItemStack(Items.planks, 3)),
 
             new CraftingRecipe(new ItemStack(Items.sandstone, 1), new ItemStack(Items.sand, 4))
     };
@@ -38,7 +39,7 @@ public class CraftingSystem {
         String recipesString = "";
 
         if (availableRecipes.size() == 0) {
-            recipesString = "none";
+            recipesString = "none ";
         } else {
             for (int i = 0; i < availableRecipes.size(); i++) {
                 recipesString += (i + 1) + ") " + availableRecipes.get(i) + "\n";
