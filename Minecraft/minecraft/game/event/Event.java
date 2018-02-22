@@ -14,7 +14,7 @@ import minecraft.item.Items;
 public class Event {
     public static final Event TREES = new Event("you see trees",
             new Response("chop them down", ResponseType.GET_ITEM, EquipmentType.AXE, new ItemStack(Items.log, 4, 6)),
-            new Response("ignore it", ResponseType.IGNORE));
+            new Response("ignore them", ResponseType.IGNORE));
     public static final Event SAND = new Event("you see sand",
             new Response("dig some sand", ResponseType.GET_ITEM, EquipmentType.SHOVEL, new ItemStack(Items.sand, 15, 25)),
             new Response("ignore it", ResponseType.IGNORE));

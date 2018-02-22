@@ -65,14 +65,20 @@ public class ItemStack {
         return hasItem(other) && hasAmount(other);
     }
 
-    public boolean subtract(ItemStack other) {
-        if (!has(other)) {
-            return false;
+    public ItemStack subtract(ItemStack other) {
+        if (!hasItem(other)) {
+            return other;
+        }
+
+        if (other.amount > this.amount) {
+            int previous = this.amount;
+            this.amount = 0;
+            return new ItemStack(other.item, other.amount - previous);
         }
 
         this.amount -= other.amount;
 
-        return true;
+        return null;
     }
 
     public ItemStack copy() {

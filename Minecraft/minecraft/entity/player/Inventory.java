@@ -125,9 +125,14 @@ public class Inventory {
             return false;
         }
 
+        outside:
         for (ItemStack otherStack : itemStacks) {
             for (ItemStack itemstack : this.itemStacks) {
-                itemstack.subtract(otherStack);
+                if (otherStack == null) {
+                    continue outside;
+                }
+
+                otherStack = itemstack.subtract(otherStack);
             }
         }
 
