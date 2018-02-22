@@ -135,7 +135,6 @@ public class PlayerEquipment {
         System.out.println(Game.player + " equipped " + item + (previous != null ? ", replacing " + previous : ""));
 
         Game.player.getInventory().subtract(new ItemStack((Item) item, 1));
-        System.out.println(new ItemStack((ItemWithDurability) item, 1));
 
         return previous;
     }
