@@ -22,7 +22,7 @@ public class Zombie extends Monster {
     }
 
     public Zombie(EntityStatus status) {
-        this.status = status;
+        this.status = status.clone();
     }
 
     public Zombie(EntityStatus status, boolean isVillager) {
@@ -55,7 +55,7 @@ public class Zombie extends Monster {
     }
 
     @Override
-    public Entity copy() {
+    public Entity clone() {
         return new Zombie(status, isVillager);
     }
 

@@ -1,10 +1,7 @@
 package minecraft.biome;
 
 import minecraft.game.Game;
-import minecraft.game.event.Event;
-import minecraft.game.event.EventChance;
-import minecraft.game.event.EventGenerator;
-import minecraft.game.event.WeightedEvents;
+import minecraft.game.event.*;
 
 public class BiomeForest extends Biome {
     @Override
@@ -29,5 +26,10 @@ public class BiomeForest extends Biome {
     @Override
     public String getEnterMessage() {
         return "you see trees and hills covering a peaceful forest";
+    }
+
+    @Override
+    public EventCreator clone() {
+        return new BiomeForest();
     }
 }

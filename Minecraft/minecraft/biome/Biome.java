@@ -40,4 +40,6 @@ public abstract class Biome implements EventCreator {
     public String toString() {
         return getName();
     }
+
+    public abstract EventCreator clone();
 }

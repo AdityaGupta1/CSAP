@@ -5,7 +5,7 @@ import minecraft.item.ItemStack;
 
 import java.util.List;
 
-public abstract class Entity implements EventCreator {
+public abstract class Entity implements EventCreator, Cloneable {
     public abstract EntityStatus getStatus();
 
     public List<ItemStack> damage(int damage) {
@@ -32,7 +32,8 @@ public abstract class Entity implements EventCreator {
 
     public abstract List<ItemStack> getDropItems();
 
-    public abstract Entity copy();
+    @Override
+    public abstract Entity clone();
 
     @Override
     public String toString() {

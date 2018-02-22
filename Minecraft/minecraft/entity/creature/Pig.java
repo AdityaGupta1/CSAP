@@ -19,7 +19,7 @@ public class Pig extends Creature {
     }
 
     public Pig(EntityStatus status) {
-        this.status = status;
+        this.status = status.clone();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Pig extends Creature {
     }
 
     @Override
-    public Entity copy() {
+    public Entity clone() {
         return new Pig(status);
     }
 }

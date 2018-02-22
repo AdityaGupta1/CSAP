@@ -1,10 +1,7 @@
 package minecraft.biome;
 
 import minecraft.game.Game;
-import minecraft.game.event.Event;
-import minecraft.game.event.EventChance;
-import minecraft.game.event.EventGenerator;
-import minecraft.game.event.WeightedEvents;
+import minecraft.game.event.*;
 
 public class BiomeDesert extends Biome {
     @Override
@@ -28,5 +25,10 @@ public class BiomeDesert extends Biome {
     @Override
     public String getEnterMessage() {
         return "you see sand and cacti, signaling a desert";
+    }
+
+    @Override
+    public EventCreator clone() {
+        return new BiomeDesert();
     }
 }

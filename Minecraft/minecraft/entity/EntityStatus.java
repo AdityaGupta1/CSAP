@@ -1,6 +1,6 @@
 package minecraft.entity;
 
-public class EntityStatus {
+public class EntityStatus implements Cloneable {
     private boolean dead = false;
 
     private final int maxHealth;
@@ -49,7 +49,12 @@ public class EntityStatus {
     }
 
     @Override
+    public EntityStatus clone() {
+        return new EntityStatus(this.maxHealth, this.health);
+    }
+
+    @Override
     public String toString() {
-        return dead ? "health: " + health + "/" + maxHealth : "dead";
+        return dead ? "dead" : "health: " + health + "/" + maxHealth;
     }
 }

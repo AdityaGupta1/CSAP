@@ -13,7 +13,7 @@ public class Villager extends Creature {
     private EntityStatus status = new EntityStatus(20);
 
     public Villager(EntityStatus status) {
-        this.status = status;
+        this.status = status.clone();
     }
 
     private List<VillagerTrade> trades = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Villager extends Creature {
     }
 
     @Override
-    public Entity copy() {
+    public Entity clone() {
         Villager villager = new Villager(status);
 
         for (VillagerTrade trade : trades) {

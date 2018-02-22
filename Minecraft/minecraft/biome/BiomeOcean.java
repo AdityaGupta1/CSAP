@@ -1,10 +1,7 @@
 package minecraft.biome;
 
 import minecraft.game.Game;
-import minecraft.game.event.Event;
-import minecraft.game.event.EventChance;
-import minecraft.game.event.EventGenerator;
-import minecraft.game.event.WeightedEvents;
+import minecraft.game.event.*;
 import minecraft.item.Items;
 
 public class BiomeOcean extends Biome {
@@ -29,5 +26,10 @@ public class BiomeOcean extends Biome {
     @Override
     public double getLeaveChance() {
         return Game.player.getInventory().has(Items.boat) ? 0.05 : 0.01;
+    }
+
+    @Override
+    public EventCreator clone() {
+        return new BiomeOcean();
     }
 }

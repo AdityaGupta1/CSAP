@@ -52,7 +52,7 @@ public class Response {
                 player.pickUp(itemStacks);
                 break;
             case FIGHT:
-                Entity entity = ((Entity) consequences[0]).copy();
+                Entity entity = ((Entity) consequences[0]);
 
                 player.damage(entity);
 
@@ -66,7 +66,7 @@ public class Response {
                 EventGenerator.changeEventCreator(Game.currentBiome);
                 break;
             case CHANGE:
-                EventGenerator.changeEventCreator((EventCreator) consequences[0]);
+                EventGenerator.changeEventCreator(((EventCreator) consequences[0]).clone());
                 System.out.println(consequences[1]);
                 break;
             case IGNORE:

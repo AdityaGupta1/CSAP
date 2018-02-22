@@ -5,6 +5,7 @@ import minecraft.entity.Entity;
 import minecraft.entity.EntityStatus;
 import minecraft.game.Game;
 import minecraft.game.event.Event;
+import minecraft.item.Item;
 import minecraft.item.ItemStack;
 import minecraft.item.ItemWithDurability;
 
@@ -33,12 +34,17 @@ public class Player extends Entity {
 
         if (drops == null) {
             System.out.println(this + " hit " + other + " for " + getAttackDamage() + " damage");
+            System.out.println(other + "'s " + other.getStatus());
         } else {
             System.out.println(this + " killed " + other + ", which dropped " + drops);
             pickUp(drops);
         }
 
-        ((ItemWithDurability) equipment.getAttackTool()).damage();
+        ItemWithDurability attackTool = ((ItemWithDurability) equipment.getAttackTool());
+
+        if (attackTool != null) {
+            attackTool.damage();
+        }
     }
 
     public void enterBiome(Biome biome) {
@@ -86,7 +92,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public Entity copy() {
+    public Entity clone() {
         return null;
     }
 

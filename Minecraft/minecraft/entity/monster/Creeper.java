@@ -20,7 +20,7 @@ public class Creeper extends Monster {
     }
 
     public Creeper(EntityStatus status) {
-        this.status = status;
+        this.status = status.clone();
     }
 
     public Creeper(EntityStatus status, boolean isCharged) {
@@ -48,7 +48,7 @@ public class Creeper extends Monster {
     }
 
     @Override
-    public Creeper copy() {
+    public Creeper clone() {
         return new Creeper(status, isCharged);
     }
 }
