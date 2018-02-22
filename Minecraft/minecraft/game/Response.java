@@ -2,10 +2,11 @@ package minecraft.game;
 
 import minecraft.biome.Biome;
 import minecraft.entity.Entity;
+import minecraft.game.event.EventCreator;
+import minecraft.game.event.EventGenerator;
 import minecraft.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Response {
@@ -34,17 +35,24 @@ public class Response {
 
                 Game.player.pickUp(itemStacks);
                 break;
-            case KILL_MOB:
-                List<Entity> entities = new ArrayList<>();
+            case FIGHT:
+                Entity entity = ((Entity) consequences[0]).copy();
 
-                for (Object object : consequences) {
-                    entities.add(((Entity) object).copy());
+                // will change to striking with equipped weapon instead of auto kill
+                Game.player.kill(entity);
+
+                if (entity.isDead()) {
+                    EventGenerator.resetEventCreator();
                 }
 
-                Game.player.kill(entities);
                 break;
             case ENTER_BIOME:
                 Game.player.enterBiome((Biome) consequences[0]);
+                EventGenerator.changeEventCreator(Game.currentBiome);
+                break;
+            case CHANGE:
+                EventGenerator.changeEventCreator((EventCreator) consequences[0]);
+                System.out.println(consequences[1]);
                 break;
             case IGNORE:
             default:

@@ -8,7 +8,11 @@ import minecraft.game.event.WeightedEvents;
 
 public class BiomeForest extends Biome {
     @Override
-    public Event getEvent() {
+    public Event create() {
+        if (EventGenerator.random(Game.currentBiome.getLeaveChance())) {
+            return EventGenerator.pickRandomNewBiome().getEnterEvent();
+        }
+
         WeightedEvents events = new WeightedEvents();
 
         if (!Game.isNight()) {

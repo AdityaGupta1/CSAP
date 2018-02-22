@@ -1,5 +1,6 @@
 package minecraft.entity;
 
+import minecraft.game.event.Event;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
 
@@ -25,6 +26,11 @@ public class Villager extends Creature {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Event create() {
+        return null;
     }
 
     @Override

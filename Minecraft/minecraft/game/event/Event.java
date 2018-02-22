@@ -18,20 +18,20 @@ public class Event {
             new Response("ignore it", ResponseType.IGNORE));
 
     public static final Event PIG = new Event("you see a pig",
-                    new Response("kill it", ResponseType.KILL_MOB, new Pig()),
+                    new Response("fight it", ResponseType.CHANGE, new Pig(), "you engage the pig"),
                     new Response("ignore it", ResponseType.IGNORE));
     public static final Event COW  = new Event("you see a cow",
-                    new Response("kill it", ResponseType.KILL_MOB, new Cow()),
+                    new Response("fight it", ResponseType.CHANGE, new Cow(), "you engage the cow"),
                     new Response("ignore it", ResponseType.IGNORE));
     public static final Event SQUID = new Event("you see a squid",
-                    new Response("kill it", ResponseType.KILL_MOB, new Squid()),
+                    new Response("fight it", ResponseType.CHANGE, new Squid(), "you engage the squid"),
                     new Response("ignore it", ResponseType.IGNORE));
 
     public static final Event ZOMBIE = new Event("you see a zombie",
-                    new Response("kill it", ResponseType.KILL_MOB, new Zombie(false)),
+                    new Response("fight it", ResponseType.CHANGE, new Zombie(false), "you engage the zombie"),
                     new Response("run away", ResponseType.IGNORE));
     public static final Event CREEPER = new Event("you see a creeper",
-                    new Response("kill it", ResponseType.KILL_MOB, new Creeper()),
+                    new Response("fight it", ResponseType.CHANGE, new Creeper(), "you engage the creeper"),
                     new Response("run away", ResponseType.IGNORE));
 
     private final String message;

@@ -1,10 +1,11 @@
 package minecraft.entity;
 
+import minecraft.game.event.EventCreator;
 import minecraft.item.ItemStack;
 
 import java.util.List;
 
-public abstract class Entity {
+public abstract class Entity implements EventCreator {
     private boolean dead;
 
     public List<ItemStack> die() {
@@ -13,6 +14,7 @@ public abstract class Entity {
         }
 
         this.dead = true;
+
         return ItemStack.removeEmpty(getDropItems());
     }
 

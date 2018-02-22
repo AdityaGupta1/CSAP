@@ -9,7 +9,11 @@ import minecraft.item.Items;
 
 public class BiomeOcean extends Biome {
     @Override
-    public Event getEvent() {
+    public Event create() {
+        if (EventGenerator.random(Game.currentBiome.getLeaveChance())) {
+            return EventGenerator.pickRandomNewBiome().getEnterEvent();
+        }
+
         WeightedEvents events = new WeightedEvents();
 
         events.add(EventChance.generateChances(EventGenerator.OCEAN, 1));

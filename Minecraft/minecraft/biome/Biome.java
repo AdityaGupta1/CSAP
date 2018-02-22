@@ -3,13 +3,13 @@ package minecraft.biome;
 import minecraft.game.Response;
 import minecraft.game.ResponseType;
 import minecraft.game.event.Event;
+import minecraft.game.event.EventCreator;
 
-public abstract class Biome {
-    public abstract Event getEvent();
+public abstract class Biome implements EventCreator {
     public abstract String getEnterMessage();
 
     public double getLeaveChance() {
-        return 1;
+        return 0.05;
     }
 
     // example: "BiomeExtremeHills" --> "extreme hills"

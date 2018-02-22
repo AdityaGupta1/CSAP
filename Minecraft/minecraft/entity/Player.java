@@ -2,6 +2,8 @@ package minecraft.entity;
 
 import minecraft.biome.Biome;
 import minecraft.game.Game;
+import minecraft.game.ResponseType;
+import minecraft.game.event.Event;
 import minecraft.item.Inventory;
 import minecraft.item.ItemStack;
 
@@ -70,6 +72,11 @@ public class Player extends Entity {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Event create() {
+        return null;
     }
 
     @Override

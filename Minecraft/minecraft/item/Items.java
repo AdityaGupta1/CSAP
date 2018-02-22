@@ -6,6 +6,8 @@ public class Items {
     public static final Item stick;
     public static final Item boat;
 
+    public static final Item wooden_sword;
+
     public static final Item sand;
     public static final Item sandstone;
     public static final Item cactus;
@@ -27,6 +29,8 @@ public class Items {
         planks = new Item("planks");
         stick = new Item("stick");
         boat = new Item("boat");
+
+        wooden_sword = new ItemSword("wooden sword", 48, 4);
 
         sand = new Item("sand");
         sandstone = new Item("sandstone");

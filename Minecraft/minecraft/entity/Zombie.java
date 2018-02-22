@@ -1,5 +1,8 @@
 package minecraft.entity;
 
+import minecraft.game.Response;
+import minecraft.game.ResponseType;
+import minecraft.game.event.Event;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
 
@@ -16,6 +19,13 @@ public class Zombie extends Monster {
     public Zombie convertVillager(Villager villager) {
         villager.die();
         return new Zombie(true);
+    }
+
+    @Override
+    public Event create() {
+        return new Event("you keep a safe distance from the zombie",
+                new Response("strike it", ResponseType.FIGHT, this),
+                new Response("ignore it", ResponseType.IGNORE));
     }
 
     @Override

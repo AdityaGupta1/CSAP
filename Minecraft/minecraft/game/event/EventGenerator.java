@@ -13,19 +13,21 @@ public class EventGenerator {
 
     private static final Biome[] BIOMES = {new BiomeForest(), new BiomeDesert(), new BiomeOcean()};
 
+    public static EventCreator eventCreator = Game.currentBiome;
+
     public static Event generate() {
-        if (random(Game.currentBiome.getLeaveChance())) {
-            return pickRandomNewBiome().getEnterEvent();
-        }
-
-        return Game.currentBiome.getEvent();
+        return eventCreator.create();
     }
 
-    private static boolean random(double probability) {
-        return Game.random.nextDouble() < probability;
+    public static void changeEventCreator(EventCreator newEventCreator) {
+        eventCreator = newEventCreator;
     }
 
-    private static Biome pickRandomNewBiome() {
+    public static void resetEventCreator() {
+        changeEventCreator(Game.currentBiome);
+    }
+
+    public static Biome pickRandomNewBiome() {
         Biome biome;
 
         do {
@@ -33,5 +35,9 @@ public class EventGenerator {
         } while (Game.currentBiome.equals(biome));
 
         return biome;
+    }
+
+    public static boolean random(double probability) {
+        return Game.random.nextDouble() < probability;
     }
 }

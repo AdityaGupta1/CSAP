@@ -13,6 +13,8 @@ public class CraftingSystem {
             new CraftingRecipe(new ItemStack(Items.stick, 4), new ItemStack(Items.planks, 2)),
             new CraftingRecipe(new ItemStack(Items.boat, 1), new ItemStack(Items.planks, 5)),
 
+            new CraftingRecipe(new ItemStack(Items.wooden_sword, 1), new ItemStack(Items.stick, 1), new ItemStack(Items.planks, 2)),
+
             new CraftingRecipe(new ItemStack(Items.sandstone, 1), new ItemStack(Items.sand, 4))
     };
 
