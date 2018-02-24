@@ -53,22 +53,28 @@ public class Event {
     }
 
     public String getChoices() {
-        String choicesString = "you can: ";
+        String choicesString = "";
 
-        for (Response response : responses) {
-            choicesString += response.getInput() + "; ";
+        for (int i = 0; i < responses.length; i++) {
+            choicesString += (i + 1) + ") " + responses[i].getInput() + "\n";
         }
 
-        return choicesString.substring(0, choicesString.length() - 2);
+        return choicesString.substring(0, choicesString.length() - 1);
     }
 
     public Response getResponseFromInput(String input) {
-        for (Response response : responses) {
-            if (response.getInput().equalsIgnoreCase(input)) {
-                return response;
-            }
+        int inputNumber;
+
+        try {
+            inputNumber = Integer.parseInt(input) - 1;
+        } catch(NumberFormatException exception) {
+            return null;
         }
 
-        return null;
+        if (inputNumber >= responses.length || inputNumber < 0) {
+            return null;
+        }
+
+        return responses[inputNumber];
     }
 }

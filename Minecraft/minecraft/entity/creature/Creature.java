@@ -9,7 +9,7 @@ import minecraft.item.ItemStack;
 import java.util.List;
 
 public abstract class Creature extends Entity {
-    boolean hasBeenDamaged = false;
+    private boolean hasBeenDamaged = false;
 
     public List<ItemStack> damage(int damage) {
         hasBeenDamaged = true;
@@ -21,15 +21,15 @@ public abstract class Creature extends Entity {
 
     protected String getEventMessage() {
         if (hasBeenDamaged) {
-            return getNormalMessage();
-        } else {
             return getDamagedMessage();
+        } else {
+            return getNormalMessage();
         }
     }
 
     @Override
     public Event create() {
-        return new Event("you look at the squid swimming lazily",
+        return new Event(getEventMessage(),
                 new Response("strike it", ResponseType.FIGHT, this),
                 new Response("ignore it", ResponseType.IGNORE));
     }

@@ -18,6 +18,8 @@ public class CraftingSystem {
                     new ItemStack(Items.planks, 2)),
             new CraftingRecipe(new ItemStack(Items.wooden_axe, 1), new ItemStack(Items.stick, 2),
                     new ItemStack(Items.planks, 3)),
+            new CraftingRecipe(new ItemStack(Items.wooden_pickaxe, 1), new ItemStack(Items.stick, 2),
+                    new ItemStack(Items.planks, 3)),
 
             new CraftingRecipe(new ItemStack(Items.sandstone, 1), new ItemStack(Items.sand, 4))
     };

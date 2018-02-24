@@ -8,6 +8,7 @@ public class Items {
 
     public static final Item wooden_sword;
     public static final Item wooden_axe;
+    public static final Item wooden_pickaxe;
 
     public static final Item sand;
     public static final Item sandstone;
@@ -33,6 +34,7 @@ public class Items {
 
         wooden_sword = new ItemSword("wooden sword", 48, 4);
         wooden_axe = new ItemAxe("wooden axe", 48, 3, 1.5, 2);
+        wooden_pickaxe = new ItemPickaxe("wooden pickaxe", 48, 2, 1.5, 2);
 
         sand = new Item("sand");
         sandstone = new Item("sandstone");

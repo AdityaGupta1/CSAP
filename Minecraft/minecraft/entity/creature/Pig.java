@@ -29,7 +29,7 @@ public class Pig extends Creature {
 
     @Override
     protected String getDamagedMessage() {
-        return "you chase after the pig as it runs around\"";
+        return "you chase after the pig as it runs around";
     }
 
     @Override

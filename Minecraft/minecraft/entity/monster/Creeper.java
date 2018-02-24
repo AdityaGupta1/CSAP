@@ -26,7 +26,7 @@ public class Creeper extends Monster {
     }
 
     public Creeper(EntityStatus status, boolean isCharged) {
-        this.status = status;
+        this(status);
         this.isCharged = isCharged;
     }
 
@@ -42,7 +42,7 @@ public class Creeper extends Monster {
 
     @Override
     protected double getFightChance() {
-        return 0.2;
+        return 0.15;
     }
 
     @Override
