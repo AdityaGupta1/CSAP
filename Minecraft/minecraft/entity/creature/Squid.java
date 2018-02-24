@@ -2,8 +2,8 @@ package minecraft.entity.creature;
 
 import minecraft.entity.Entity;
 import minecraft.entity.EntityStatus;
-import minecraft.game.Response;
-import minecraft.game.ResponseType;
+import minecraft.game.event.Response;
+import minecraft.game.event.ResponseType;
 import minecraft.game.event.Event;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
@@ -23,15 +23,18 @@ public class Squid extends Creature {
     }
 
     @Override
-    public EntityStatus getStatus() {
-        return status;
+    protected String getNormalMessage() {
+        return "you look at the squid swimming lazily";
     }
 
     @Override
-    public Event create() {
-        return new Event("you look at the squid swimming lazily",
-                new Response("strike it", ResponseType.FIGHT, this),
-                new Response("ignore it", ResponseType.IGNORE));
+    protected String getDamagedMessage() {
+        return "you chase after the squid as it swims away";
+    }
+
+    @Override
+    public EntityStatus getStatus() {
+        return status;
     }
 
     @Override

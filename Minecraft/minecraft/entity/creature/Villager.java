@@ -27,13 +27,23 @@ public class Villager extends Creature {
     }
 
     @Override
-    public EntityStatus getStatus() {
-        return status;
+    protected String getNormalMessage() {
+        return null;
+    }
+
+    @Override
+    protected String getDamagedMessage() {
+        return null;
     }
 
     @Override
     public Event create() {
         return null;
+    }
+
+    @Override
+    public EntityStatus getStatus() {
+        return status;
     }
 
     @Override

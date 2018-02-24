@@ -29,6 +29,13 @@ public class Player extends Entity {
         System.out.println(this + " picked up " + itemStacks);
     }
 
+    public List<ItemStack> damage(int damage) {
+        System.out.println(this + " took " + damage + " damage");
+        List<ItemStack> drops = super.damage(damage);
+        System.out.println(this + "'s health: " + this.getStatus());
+        return drops;
+    }
+
     public void damage(Entity other) {
         List<ItemStack> drops = other.damage(getAttackDamage());
 

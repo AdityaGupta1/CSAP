@@ -5,8 +5,6 @@ import minecraft.entity.creature.Pig;
 import minecraft.entity.creature.Squid;
 import minecraft.entity.monster.Creeper;
 import minecraft.entity.monster.Zombie;
-import minecraft.game.Response;
-import minecraft.game.ResponseType;
 import minecraft.item.EquipmentType;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;

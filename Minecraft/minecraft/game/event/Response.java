@@ -1,10 +1,10 @@
-package minecraft.game;
+package minecraft.game.event;
 
 import minecraft.biome.Biome;
 import minecraft.entity.Entity;
+import minecraft.entity.monster.Monster;
 import minecraft.entity.player.Player;
-import minecraft.game.event.EventCreator;
-import minecraft.game.event.EventGenerator;
+import minecraft.game.Game;
 import minecraft.item.EquipmentType;
 import minecraft.item.ItemStack;
 import minecraft.item.ItemWithDurability;
@@ -58,6 +58,11 @@ public class Response {
 
                 if (entity.isDead()) {
                     EventGenerator.resetEventCreator();
+                    break;
+                }
+
+                if (entity instanceof Monster) {
+                    ((Monster) entity).fight();
                 }
 
                 break;

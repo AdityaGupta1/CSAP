@@ -3,7 +3,7 @@ package minecraft.world;
 public class Sky {
     // 0000 to 1440
     // 1 second real time --> 1 minute minecraft time
-    private int time = 359;
+    private int time = 360 - 1;
 
     public void incrementTime(int time) {
         this.time += time;

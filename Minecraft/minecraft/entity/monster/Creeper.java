@@ -1,8 +1,10 @@
 package minecraft.entity.monster;
 
 import minecraft.entity.EntityStatus;
-import minecraft.game.Response;
-import minecraft.game.ResponseType;
+import minecraft.game.Game;
+import minecraft.game.event.EventGenerator;
+import minecraft.game.event.Response;
+import minecraft.game.event.ResponseType;
 import minecraft.game.event.Event;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
@@ -29,6 +31,42 @@ public class Creeper extends Monster {
     }
 
     @Override
+    protected int getMinDamage() {
+        return 3;
+    }
+
+    @Override
+    protected int getMaxDamage() {
+        return 5;
+    }
+
+    @Override
+    protected double getFightChance() {
+        return 0.2;
+    }
+
+    @Override
+    protected String getHitMessage() {
+        return this + " exploded!";
+    }
+
+    @Override
+    protected String getMissMessage() {
+        return this + " almost exploded, stopping just in time";
+    }
+
+    @Override
+    public void fight() {
+        if (EventGenerator.random(getFightChance())) {
+            System.out.println(getHitMessage());
+            Game.player.damage(getAttackDamage());
+            this.setDead();
+        } else {
+            System.out.println(getMissMessage());
+        }
+    }
+
+    @Override
     public EntityStatus getStatus() {
         return status;
     }
@@ -37,7 +75,7 @@ public class Creeper extends Monster {
     public Event create() {
         return new Event("you keep a safe distance from the creeper",
                 new Response("strike it", ResponseType.FIGHT, this),
-                new Response("ignore it", ResponseType.IGNORE));
+                new Response("keep moving", ResponseType.IGNORE));
     }
 
     @Override

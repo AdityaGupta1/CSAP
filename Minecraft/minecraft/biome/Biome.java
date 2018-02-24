@@ -1,7 +1,7 @@
 package minecraft.biome;
 
-import minecraft.game.Response;
-import minecraft.game.ResponseType;
+import minecraft.game.event.Response;
+import minecraft.game.event.ResponseType;
 import minecraft.game.event.Event;
 import minecraft.game.event.EventCreator;
 

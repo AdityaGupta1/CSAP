@@ -1,4 +1,4 @@
-package minecraft.game;
+package minecraft.game.event;
 
 public enum ResponseType {
     GET_ITEM,
