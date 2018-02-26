@@ -6,8 +6,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             (new Game()).startLoop();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
         }
     }
 }
