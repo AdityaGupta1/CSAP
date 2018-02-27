@@ -147,19 +147,6 @@ public class PlayerEquipment {
         return previous;
     }
 
-//    @Override
-//    public String toString() {
-//        return PrintUtils.wrap("current equipment: ", false, true) +
-//                "sword: " + (sword == null ? "none" : sword) + ",\n" +
-//                "axe: " + (axe == null ? "none" : axe)  + ",\n" +
-//                "pickaxe: " + (pickaxe == null ? "none" : pickaxe)  + ", \n" +
-//                "shovel: " + (shovel == null ? "none" : shovel)  + ", \n" +
-//                "helmet: " + (helmet == null ? "none" : helmet)  + ", \n" +
-//                "chestplate: " + (chestplate == null ? "none" : chestplate)  + ", \n" +
-//                "leggings: " + (leggings == null ? "none" : leggings)  + ", \n" +
-//                "boots: " + (boots == null ? "none" : boots) ;
-//    }
-
     @Override
     public String toString() {
         String string = PrintUtils.wrap("current equipment: ", false, true);
