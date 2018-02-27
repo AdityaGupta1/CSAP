@@ -1,6 +1,7 @@
 package minecraft.entity.creature;
 
 import minecraft.entity.Entity;
+import minecraft.game.Game;
 import minecraft.game.event.Event;
 import minecraft.game.event.Response;
 import minecraft.game.event.ResponseType;
@@ -30,7 +31,7 @@ public abstract class Creature extends Entity {
     @Override
     public Event create() {
         return new Event(getEventMessage(),
-                new Response("strike it", ResponseType.FIGHT, this),
-                new Response("ignore it", ResponseType.IGNORE));
+                new Response("strike it", 1, ResponseType.FIGHT, this),
+                new Response("ignore it", 0, ResponseType.FLEE, Game.player + " left " + this + " alone"));
     }
 }

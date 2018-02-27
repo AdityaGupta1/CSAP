@@ -10,6 +10,10 @@ public class Items {
     public static final Item wooden_axe;
     public static final Item wooden_pickaxe;
 
+    public static final Item stone_sword;
+    public static final Item stone_axe;
+    public static final Item stone_pickaxe;
+
     public static final Item sand;
     public static final Item sandstone;
     public static final Item cactus;
@@ -26,6 +30,15 @@ public class Items {
 
     public static final Item emerald;
 
+    public static final Item cobblestone;
+    public static final Item dirt;
+    public static final Item coal_ore;
+    public static final Item coal;
+    public static final Item iron_ore;
+    public static final Item iron_ingot;
+    public static final Item diamond_ore;
+    public static final Item diamond;
+
     static {
         log = new Item("log");
         planks = new Item("planks");
@@ -34,7 +47,11 @@ public class Items {
 
         wooden_sword = new ItemSword("wooden sword", 48, 4);
         wooden_axe = new ItemAxe("wooden axe", 48, 3, 1.5, 2);
-        wooden_pickaxe = new ItemPickaxe("wooden pickaxe", 48, 2, 1.5, 2);
+        wooden_pickaxe = new ItemPickaxe("wooden pickaxe", 48, 2, 1.5, 2, 1);
+
+        stone_sword = new ItemSword("stone sword", 192, 5);
+        stone_axe = new ItemAxe("stone axe", 192, 4, 2, 2.75);
+        stone_pickaxe = new ItemPickaxe("stone pickaxe", 192, 3, 2, 2.75, 2);
 
         sand = new Item("sand");
         sandstone = new Item("sandstone");
@@ -51,5 +68,14 @@ public class Items {
         gunpowder = new Item("gunpowder");
 
         emerald = new Item("emerald");
+
+        cobblestone = new Item("cobblestone");
+        dirt = new Item("dirt");
+        coal_ore = new Item("coal ore");
+        coal = new Item("coal");
+        iron_ore = new Item("iron ore");
+        iron_ingot = new Item("iron ingot");
+        diamond_ore = new Item("diamond ore");
+        diamond = new Item("diamond");
     }
 }

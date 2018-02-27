@@ -5,11 +5,17 @@ public class Sky {
     // 1 second real time --> 1 minute minecraft time
     private int time = 360 - 1;
 
-    public void incrementTime(int time) {
+    public void elapseTime(int time) {
         this.time += time;
 
         if (this.time >= 1440) {
             this.time = this.time % 1440;
+        }
+
+        try {
+            Thread.sleep(time * 1000);
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
         }
     }
 

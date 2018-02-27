@@ -25,6 +25,7 @@ public class ItemWithDurability extends Item {
 
         if (durability == 0) {
             broken = true;
+            System.out.println(this + " broke");
         }
     }
 

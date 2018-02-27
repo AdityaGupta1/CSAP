@@ -1,7 +1,7 @@
 package minecraft.entity.player;
 
 import minecraft.game.Game;
-import minecraft.game.Util;
+import minecraft.game.PrintUtils;
 import minecraft.item.*;
 
 public class PlayerEquipment {
@@ -92,6 +92,14 @@ public class PlayerEquipment {
         return get(type).getModifier();
     }
 
+    public int getMiningLevel() {
+        if (this.get(EquipmentType.PICKAXE) == null) {
+            return -1;
+        }
+
+        return ((ItemPickaxe) this.get(EquipmentType.PICKAXE)).getMiningLevel();
+    }
+
     private void set(EquipmentType type, ItemEquipment item) {
         switch(type) {
             case SWORD:
@@ -139,16 +147,28 @@ public class PlayerEquipment {
         return previous;
     }
 
+//    @Override
+//    public String toString() {
+//        return PrintUtils.wrap("current equipment: ", false, true) +
+//                "sword: " + (sword == null ? "none" : sword) + ",\n" +
+//                "axe: " + (axe == null ? "none" : axe)  + ",\n" +
+//                "pickaxe: " + (pickaxe == null ? "none" : pickaxe)  + ", \n" +
+//                "shovel: " + (shovel == null ? "none" : shovel)  + ", \n" +
+//                "helmet: " + (helmet == null ? "none" : helmet)  + ", \n" +
+//                "chestplate: " + (chestplate == null ? "none" : chestplate)  + ", \n" +
+//                "leggings: " + (leggings == null ? "none" : leggings)  + ", \n" +
+//                "boots: " + (boots == null ? "none" : boots) ;
+//    }
+
     @Override
     public String toString() {
-        return Util.wrap("current equipment: ", false, true) +
-                "sword: " + (sword == null ? "none" : sword) + ",\n" +
-                "axe: " + (axe == null ? "none" : axe)  + ",\n" +
-                "pickaxe: " + (pickaxe == null ? "none" : pickaxe)  + ", \n" +
-                "shovel: " + (shovel == null ? "none" : shovel)  + ", \n" +
-                "helmet: " + (helmet == null ? "none" : helmet)  + ", \n" +
-                "chestplate: " + (chestplate == null ? "none" : chestplate)  + ", \n" +
-                "leggings: " + (leggings == null ? "none" : leggings)  + ", \n" +
-                "boots: " + (boots == null ? "none" : boots) ;
+        String string = PrintUtils.wrap("current equipment: ", false, true);
+
+        for (EquipmentType type : EquipmentType.values()) {
+            ItemEquipment item = this.get(type);
+            string += type.toString().toLowerCase() + ": " + (item == null ? "none" : item)+ ",\n";
+        }
+
+        return string.substring(0, string.length() - 2);
     }
 }

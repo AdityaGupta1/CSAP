@@ -27,8 +27,8 @@ public abstract class Biome implements EventCreator {
 
     public Event getEnterEvent() {
         return new Event(this.getEnterMessage(),
-                new Response("enter the " + this.getName(), ResponseType.ENTER_BIOME, this),
-                new Response("ignore it", ResponseType.IGNORE));
+                new Response("enter the " + this.getName(), 2, ResponseType.ENTER_BIOME, this),
+                new Response("ignore it", 0, ResponseType.IGNORE));
     }
 
     @Override

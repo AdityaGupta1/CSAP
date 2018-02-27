@@ -1,6 +1,6 @@
 package minecraft.game.crafting;
 
-import minecraft.game.Util;
+import minecraft.game.PrintUtils;
 import minecraft.item.ItemStack;
 import minecraft.item.Items;
 
@@ -20,6 +20,13 @@ public class CraftingSystem {
                     new ItemStack(Items.planks, 3)),
             new CraftingRecipe(new ItemStack(Items.wooden_pickaxe, 1), new ItemStack(Items.stick, 2),
                     new ItemStack(Items.planks, 3)),
+
+            new CraftingRecipe(new ItemStack(Items.stone_sword, 1), new ItemStack(Items.stick, 1),
+                    new ItemStack(Items.cobblestone, 2)),
+            new CraftingRecipe(new ItemStack(Items.stone_axe, 1), new ItemStack(Items.stick, 2),
+                    new ItemStack(Items.cobblestone, 3)),
+            new CraftingRecipe(new ItemStack(Items.stone_pickaxe, 1), new ItemStack(Items.stick, 2),
+                    new ItemStack(Items.cobblestone, 3)),
 
             new CraftingRecipe(new ItemStack(Items.sandstone, 1), new ItemStack(Items.sand, 4))
     };
@@ -48,6 +55,6 @@ public class CraftingSystem {
             }
         }
 
-        return "available recipes:" + Util.wrap(recipesString.substring(0, recipesString.length() - 1), true);
+        return "available recipes:" + PrintUtils.wrap(recipesString.substring(0, recipesString.length() - 1), true);
     }
 }

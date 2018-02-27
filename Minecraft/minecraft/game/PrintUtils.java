@@ -1,6 +1,6 @@
 package minecraft.game;
 
-public class Util {
+public class PrintUtils {
     private static final String line = "--------------------------------------------------------------";
 
     public static String line(boolean newlineBefore, boolean newlineAfter) {

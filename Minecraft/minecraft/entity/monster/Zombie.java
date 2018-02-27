@@ -69,8 +69,8 @@ public class Zombie extends Monster {
     @Override
     public Event create() {
         return new Event("you keep a safe distance from the zombie",
-                new Response("strike it", ResponseType.FIGHT, this),
-                new Response("keep moving", ResponseType.IGNORE));
+                new Response("strike it", 2, ResponseType.FIGHT, this),
+                new Response("run away", 3, ResponseType.FLEE, Game.player + " fled from " + this));
     }
 
     @Override

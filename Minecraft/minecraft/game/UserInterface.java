@@ -4,42 +4,43 @@ import minecraft.entity.player.PlayerEquipment;
 import minecraft.game.crafting.CraftingRecipe;
 import minecraft.game.event.Event;
 import minecraft.game.event.EventGenerator;
+import minecraft.game.mining.Mine;
 import minecraft.item.EquipmentType;
 import minecraft.item.ItemEquipment;
 
 import java.util.*;
 
-public class UserInterface implements Runnable {
+public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
-    private HashMap<String, Boolean> shouldPrintLines = new HashMap<>();
+    static final String controlsMessage = "commands: H = help, R = replay event, I = inventory, " +
+            "C = crafting, E = equipment, S = status, M = mining, O = return to overworld from mining, " +
+            "Q = quit game";
+    private List<String> validCommands = Arrays.asList("h", "?", "help", "r", "i", "c", "e", "s", "m", "o", "q");
 
-    UserInterface() {
-        shouldPrintLines.put("h", true);
-        shouldPrintLines.put("r", false);
-        shouldPrintLines.put("i", true);
-        shouldPrintLines.put("c", true);
-        shouldPrintLines.put("e", true);
-        shouldPrintLines.put("s", true);
-        shouldPrintLines.put("q", true);
-    }
+    private boolean reset = false;
+
+    private boolean mining = false;
 
     void showEvent() {
         Event event = EventGenerator.generate();
 
-        System.out.println(event.getMessage());
-
         String input;
         do {
+            if (reset) {
+                reset = false;
+                showEvent();
+                return;
+            }
+
+            System.out.println(event.getMessage());
             System.out.println(event.getChoices());
             input = scanner.nextLine();
 
-            if (shouldPrintLines.containsKey(input)) {
-                String wrapper = shouldPrintLines.get(input) ? "\n" : "";
-                System.out.print(wrapper);
+            if (validCommands.contains(input)) {
+                System.out.println();
                 runCommand(input);
-                System.out.print(wrapper);
-                System.out.println(event.getMessage());
+                System.out.println();
             }
         } while (event.getResponseFromInput(input) == null);
 
@@ -47,11 +48,17 @@ public class UserInterface implements Runnable {
         System.out.println();
     }
 
+    public void reset() {
+        reset = true;
+    }
+
     private void runCommand(String input) {
         command:
         switch (input.toLowerCase()) {
             case "h":
-                System.out.println(Game.controlsMessage);
+            case "?":
+            case "help":
+                System.out.println(controlsMessage);
                 break;
             case "r":
                 break;
@@ -67,10 +74,10 @@ public class UserInterface implements Runnable {
 
                 int recipe = 0;
                 do {
-                    System.out.println("type a recipe's number to craft it or \"e\" to exit");
+                    System.out.println("type a recipe's number to craft it or \"x\" to exit");
                     String stringInput = scanner.nextLine();
 
-                    if (stringInput.equals("e")) {
+                    if (stringInput.equals("x")) {
                         break command;
                     }
 
@@ -103,7 +110,7 @@ public class UserInterface implements Runnable {
                         continue;
                     }
 
-                    System.out.println(Util.wrap(type.toString().toLowerCase(), true, false));
+                    System.out.println(PrintUtils.wrap(type.toString().toLowerCase(), true, false));
 
                     for (ItemEquipment singleEquipment : equipmentOfType) {
                         equipment.add(singleEquipment);
@@ -115,10 +122,10 @@ public class UserInterface implements Runnable {
 
                 int equipmentChoice = 0;
                 do {
-                    System.out.println("type an item's number to equip it or \"e\" to exit");
+                    System.out.println("type an item's number to equip it or \"x\" to exit");
                     String stringInput = scanner.nextLine();
 
-                    if (stringInput.equals("e")) {
+                    if (stringInput.equals("x")) {
                         break command;
                     }
 
@@ -136,22 +143,37 @@ public class UserInterface implements Runnable {
                 playerEquipment.swap(equipment.get(equipmentChoice - 1));
                 break;
             case "s":
-                System.out.println("status not implemented yet");
+                System.out.println(Game.player);
+                break;
+            case "m":
+                if (Game.player.getEquipment().get(EquipmentType.PICKAXE) == null) {
+                    System.out.println("you need a pickaxe equipped to go mining");
+                    System.out.println("type \"e\" to open the equipment menu");
+                    break;
+                }
+
+                EventGenerator.changeEventCreator(new Mine());
+                mining = true;
+                System.out.println("entered mine");
+                System.out.println("type \"o\" to return to the overworld");
+                break;
+            case "o":
+                if (mining) {
+                    EventGenerator.resetEventCreatorToBiome();
+                    mining = false;
+                    System.out.println("returned to overworld");
+                } else {
+                    System.out.println("already in overworld");
+                }
+
                 break;
             case "q":
-                System.out.println(Util.wrap("thanks for playing!"));
+                System.out.println(PrintUtils.wrap("thanks for playing!"));
                 System.exit(0);
                 break;
             default:
-                System.out.println("unknown command");
+                System.out.println("unknown command \"" + input + "\"");
                 break;
-        }
-    }
-
-    @Override
-    public void run() {
-        while (true) {
-            showEvent();
         }
     }
 }

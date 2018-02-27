@@ -89,7 +89,7 @@ public class ItemStack {
         if (this.isRandom) {
             return new ItemStack(this.item, this.min, this.max);
         } else {
-            return this;
+            return new ItemStack(this.item, this.amount);
         }
     }
 

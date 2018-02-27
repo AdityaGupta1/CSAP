@@ -13,6 +13,7 @@ public class EventGenerator {
 
     private static final Biome[] BIOMES = {new BiomeForest(), new BiomeDesert(), new BiomeOcean()};
 
+    private static EventCreator previousEventCreator = Game.currentBiome;
     public static EventCreator eventCreator = Game.currentBiome;
 
     public static Event generate() {
@@ -20,10 +21,16 @@ public class EventGenerator {
     }
 
     public static void changeEventCreator(EventCreator newEventCreator) {
+        previousEventCreator = eventCreator;
         eventCreator = newEventCreator;
+        Game.ui.reset();
     }
 
     public static void resetEventCreator() {
+        changeEventCreator(previousEventCreator);
+    }
+
+    public static void resetEventCreatorToBiome() {
         changeEventCreator(Game.currentBiome);
     }
 
