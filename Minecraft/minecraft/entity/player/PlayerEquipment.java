@@ -18,12 +18,12 @@ public class PlayerEquipment {
         // package-private
     }
 
-    public ItemEquipment getAttackTool() {
+    public ItemTool getAttackTool() {
         ItemEquipment[] attackTools = {sword, axe, pickaxe};
 
         for (ItemEquipment attackTool : attackTools) {
             if (attackTool != null) {
-                return attackTool;
+                return (ItemTool) attackTool;
             }
         }
 
@@ -31,7 +31,7 @@ public class PlayerEquipment {
     }
 
     public int getAttackDamage() {
-        ItemEquipment attackTool = getAttackTool();
+        ItemTool attackTool = getAttackTool();
 
         if (attackTool != null) {
             return attackTool.getAttackDamage();
@@ -97,7 +97,7 @@ public class PlayerEquipment {
             return -1;
         }
 
-        return ((ItemPickaxe) this.get(EquipmentType.PICKAXE)).getMiningLevel();
+        return ((ItemPickaxe) this.get(EquipmentType.PICKAXE)).getHarvestLevel();
     }
 
     private void set(EquipmentType type, ItemEquipment item) {

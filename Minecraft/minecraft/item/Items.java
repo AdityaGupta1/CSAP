@@ -45,13 +45,13 @@ public class Items {
         stick = new Item("stick");
         boat = new Item("boat");
 
-        wooden_sword = new ItemSword("wooden sword", 48, 4);
-        wooden_axe = new ItemAxe("wooden axe", 48, 3, 1.5, 2);
-        wooden_pickaxe = new ItemPickaxe("wooden pickaxe", 48, 2, 1.5, 2, 1);
+        wooden_sword = new ItemSword("wooden sword", Material.WOOD);
+        wooden_axe = new ItemAxe("wooden axe", Material.WOOD);
+        wooden_pickaxe = new ItemPickaxe("wooden pickaxe", Material.WOOD);
 
-        stone_sword = new ItemSword("stone sword", 192, 5);
-        stone_axe = new ItemAxe("stone axe", 192, 4, 2, 2.75);
-        stone_pickaxe = new ItemPickaxe("stone pickaxe", 192, 3, 2, 2.75, 2);
+        stone_sword = new ItemSword("stone sword", Material.STONE);
+        stone_axe = new ItemAxe("stone axe", Material.STONE);
+        stone_pickaxe = new ItemPickaxe("stone pickaxe", Material.STONE);
 
         sand = new Item("sand");
         sandstone = new Item("sandstone");

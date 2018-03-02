@@ -1,27 +1,12 @@
 package minecraft.item;
 
-public class ItemSword extends ItemWithDurability implements ItemEquipment {
-    private final int attackDamage;
-
-    ItemSword(String name, int maxDurability, int durability, int attackDamage) {
-        super(name, maxDurability, durability);
-        this.attackDamage = attackDamage;
-    }
-
-    ItemSword(String name, int maxDurability, int attackDamage) {
-        this(name, maxDurability, maxDurability, attackDamage);
-    }
-
-    public int getAttackDamage() {
-        return attackDamage;
-    }
-
-    public double getModifier() {
-        return 1;
+public class ItemSword extends ItemTool {
+    ItemSword(String name, Material material) {
+        super(name, EquipmentType.SWORD, material);
     }
 
     @Override
-    public EquipmentType getType() {
-        return EquipmentType.SWORD;
+    public double getModifier() {
+        return 1;
     }
 }
