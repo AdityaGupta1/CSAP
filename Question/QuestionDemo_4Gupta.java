@@ -51,18 +51,13 @@ public class QuestionDemo_4Gupta {
       System.out.println("fifth = seventh: " + fifth.equals(seventh));
       System.out.println("fifth = third: " + fifth.equals(third));
    }
-
-   /**
-      Presents a question to the user and checks the response.
-      @param q the question
-   */
-   public static void presentQuestion(Question q)
-   {
-      q.display();
-      System.out.print("Your answer: ");
+   
+   public static void presentQuestion(Question question) {
+      question.display();
+      System.out.print("your answer: ");
       Scanner in = new Scanner(System.in);
       String response = in.nextLine();
-      System.out.println(q.checkAnswer(response));
+      System.out.println(question.checkAnswer(response) ? "correct" : "incorrect");
    }
 }
 
