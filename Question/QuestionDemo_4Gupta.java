@@ -46,6 +46,10 @@ public class QuestionDemo_4Gupta {
          presentQuestion(question);
          System.out.println();
       }
+
+      FillInQuestion seventh = new FillInQuestion("Charles's law directly relates temperature and _volume_.");
+      System.out.println("fifth = seventh: " + fifth.equals(seventh));
+      System.out.println("fifth = third: " + fifth.equals(third));
    }
 
    /**
@@ -81,9 +85,17 @@ class NumericQuestion extends Question {
 }
 
 class FillInQuestion extends Question {
+   private String text;
+
    public FillInQuestion(String text) {
       String[] parts = text.split("_");
       setText(parts[0] + "____" + parts[2]);
       setAnswer(parts[1]);
+      this.text = text;
+   }
+   
+   @Override
+   public boolean equals(Object other) {
+      return (other instanceof FillInQuestion) && (((FillInQuestion) other).text.equals(this.text));
    }
 }
