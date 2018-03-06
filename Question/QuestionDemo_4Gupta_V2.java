@@ -5,7 +5,7 @@ import java.util.Collections;
 /**
    This program shows a simple quiz with two choice questions.
 */
-public class QuestionDemo_4Gupta {
+public class QuestionDemo_4Gupta_V2 {
    public static void main(String[] args) {
       ArrayList<Question> questions = new ArrayList<>();
       
