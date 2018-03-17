@@ -35,14 +35,6 @@ public class PictureTester
     temple.explore();
   }
   
-  /** Method to test the collage method */
-  public static void testCollage()
-  {
-    Picture canvas = new Picture("640x480.jpg");
-    canvas.createCollage();
-    canvas.explore();
-  }
-  
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
   {
@@ -51,34 +43,49 @@ public class PictureTester
     swan.explore();
   }
   
-  /** Main method for testing.  Every class can have a main
-    * method in Java */
-  public static void main(String[] args)
-  {
-    // uncomment a call here to run a test
-    // and comment out the ones you don't want
-    // to run
-    testZeroBlue();
-    //testKeepOnlyBlue();
-    //testKeepOnlyRed();
-    //testKeepOnlyGreen();
-    //testNegate();
-    //testGrayscale();
-    //testFixUnderwater();
-    //testMirrorVertical();
-    //testMirrorTemple();
-    //testMirrorArms();
-    //testMirrorGull();
-    //testMirrorDiagonal();
-    //testCollage();
-    //testCopy();
-    //testEdgeDetection();
-    //testEdgeDetection2();
-    //testChromakey();
-    //testEncodeAndDecode();
-    //testGetCountRedOverValue(250);
-    //testSetRedToHalfValueInTopHalf();
-    //testClearBlueOverValue(200);
-    //testGetAverageForColumn(0);
-  }
+   public static void testGrayscale() {
+      Picture picture = new Picture("dank/thonk.png");
+      picture.grayscale();
+      picture.explore();
+   }
+  
+   public static void testKeepOnlyBlue() {
+      Picture picture = new Picture("dank/thonk.png");
+      picture.keepOnlyBlue();
+      picture.explore();
+   }
+  
+   public static void testNegate() {
+      Picture picture = new Picture("dank/thonk.png");
+      picture.negate();
+      picture.explore();
+   }
+  
+   public static void testMirrorHorizontal() {
+      Picture picture = new Picture("dank/thonk.png");
+      picture.mirrorHorizontal();
+      picture.explore();
+   }
+   
+   public static void testCopy() {
+      Picture picture = new Picture("dank/thonk.png");
+      picture.copy(new Picture("dank/pepe.jpg"), 100, 100, 0, 0, 400, 400);
+      picture.explore();
+   }
+   
+   public static void testCollage() {
+      Picture picture = new Picture("dank/thonk.png");
+      picture.createDankCollage();
+      picture.explore();
+   }
+  
+   public static void main(String[] args) {
+      // testGrayscale();
+      // testKeepOnlyBlue();
+      // testNegate();
+      // testMirrorHorizontal();
+      
+      testCopy();
+      testCollage();
+   }
 }

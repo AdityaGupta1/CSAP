@@ -16,7 +16,7 @@ import javax.swing.border.*;
  * @author Keith McDermottt, gte047w@cc.gatech.edu
  * @author Barb Ericson ericson@cc.gatech.edu
  */
-public class PictureExplorer_4Gupta implements MouseMotionListener, ActionListener, MouseListener {
+public class PictureExplorer implements MouseMotionListener, ActionListener, MouseListener {
 
     // current indicies
     /** row index */
@@ -97,7 +97,7 @@ public class PictureExplorer_4Gupta implements MouseMotionListener, ActionListen
      * Public constructor 
      * @param picture the picture to explore
      */
-    public PictureExplorer_4Gupta(DigitalPicture picture) {
+    public PictureExplorer(DigitalPicture picture) {
         // set the fields
         this.picture = picture;
         zoomFactor = 1;
@@ -751,10 +751,11 @@ public class PictureExplorer_4Gupta implements MouseMotionListener, ActionListen
     }
 
     /**
-     * Test Main.  It will explore the beach 
+     * Test Main. It will explore the beach 
      */
     public static void main(String args[]) {
-        Picture picture = new Picture("beach.jpg");
+        Picture picture = new Picture("thonk.png");
+        picture.explore();
         picture = picture.scale(0.25, 0.25);
         picture.explore();
     }
